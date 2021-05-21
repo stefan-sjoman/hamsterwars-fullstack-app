@@ -26,8 +26,10 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use('/', express.static(path.join(__dirname, 'frontend')));
+app.use('/', express.static(path.join(__dirname, '../build'))); //ÄR DET DETTA???? buildmappen istället? ska den upp till heroku?
 app.use('/img', express.static(path.join(__dirname, 'img')));
+
+
 
 // routes
 app.use('/hamsters', hamsters);
@@ -44,3 +46,6 @@ app.use('/score', score);
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}`);
 });
+
+
+//Lägg till route för ALLA andra routes ( * ).
