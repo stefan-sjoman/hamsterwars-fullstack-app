@@ -1,1 +1,13 @@
-
+@font-face {
+	font-family: Margarine;
+	src: url('./assets/fonts/Margarine-Regular.ttf');
+}
+* {
+	margin: 0;
+}
+:root {
+	--color1: rgb(136, 228, 151);
+	--color2: rgb(229, 207, 182);
+	--color3: rgb(175, 149, 118);
+	--color4: rgb(6, 121, 24);
+}

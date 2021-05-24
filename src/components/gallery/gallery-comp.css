@@ -1,0 +1,4 @@
+.gallery-comp {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+}

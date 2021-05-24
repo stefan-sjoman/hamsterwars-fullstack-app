@@ -26,8 +26,8 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use('/', express.static(path.join(__dirname, '../build'))); //ÄR DET DETTA???? buildmappen istället? ska den upp till heroku?
-app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/', express.static(path.join(__dirname, '../build')));
+app.use('/img', express.static(path.join(__dirname, './img')));
 
 // routes
 app.use('/hamsters', hamsters);
