@@ -1,0 +1,17 @@
+.start-comp {
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--color2);
+	border: 0.3em solid var(--color3);
+	border-radius: 3em;
+	margin: 1em auto;
+	padding: 1em;
+}
+.start-comp p {
+	padding: 3em;
+}
+.start-comp div{
+	display: flex;
+	justify-content: space-around;
+}

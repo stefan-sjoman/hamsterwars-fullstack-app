@@ -5,8 +5,10 @@ import './App.css';
 import GalleryComp from './components/gallery/GalleryComp';
 import BattleComp from './components/battle/BattleComp';
 import StatisticsComp from './components/statistics/StatisticsComp';
-import allHamsters from './atoms/atoms';
+import StartComp from './components/start/StartComp';
 import HistoryComp from './components/history/HistoryComp';
+import allHamsters from './atoms/atoms';
+
 
 function App() {
 
@@ -39,6 +41,7 @@ function App() {
 				<Route path="/battle"><BattleComp /></Route>
 				<Route path="/statistics"><StatisticsComp /></Route>
 				<Route path="/history"><HistoryComp /></Route>
+				<Route path="/"><StartComp /></Route>
 			</Switch>
 			</main>
 		</div>

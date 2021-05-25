@@ -25,7 +25,7 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction}:Props) => {
 				<dt>Matcher:</dt>
 				<dd>{hamster.games + " st"}</dd>
 			</dl>
-			<button className="close-btn" onClick={buttonFunction}>{buttonText}</button>
+			<button className="basic-btn" onClick={buttonFunction}>{buttonText}</button>
 		</section>
 		: <section>
 

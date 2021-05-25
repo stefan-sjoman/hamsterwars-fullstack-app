@@ -1,0 +1,19 @@
+.statistics-comp {
+	display: flex;
+}
+.statistics-comp div {
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--color2);
+	border: 0.3em solid var(--color3);
+	border-radius: 3em;
+	margin: 1em auto;
+	padding: 1em;
+}
+.statistics-comp li {
+	background-color: white;
+	border-radius: 1em;
+	padding: 1em;
+	margin: 1em;
+}
