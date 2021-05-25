@@ -18,8 +18,7 @@ function App() {
 			setHamsters(data);
 		}
 		getHamsters();
-		console.log("TA BORT" , hamsters);
-		
+		console.log("TA BORT" , hamsters); // HUR TA BORT???
 	}, [])
 
   	return (

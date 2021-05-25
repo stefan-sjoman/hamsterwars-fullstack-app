@@ -4,10 +4,10 @@ import './hamster-info.css';
 interface Props {
 	buttonText: string
 	hamster: Hamster | null
-	closeHamster: () => void
+	buttonFunction: () => void
 }
 
-const HamsterInfo = ({buttonText, hamster, closeHamster}:Props) => {
+const HamsterInfo = ({buttonText, hamster, buttonFunction}:Props) => {
 
 	return (
 		hamster ? 
@@ -25,7 +25,7 @@ const HamsterInfo = ({buttonText, hamster, closeHamster}:Props) => {
 				<dt>Matcher:</dt>
 				<dd>{hamster.games + " st"}</dd>
 			</dl>
-			<button className="close-btn" onClick={closeHamster}>{buttonText}</button>
+			<button className="close-btn" onClick={buttonFunction}>{buttonText}</button>
 		</section>
 		: <section>
 

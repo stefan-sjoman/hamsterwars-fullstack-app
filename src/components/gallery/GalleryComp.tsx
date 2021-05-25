@@ -36,7 +36,7 @@ const GalleryComp = () => {
 			</section> 
 			:	
 			<section className="open-hamster-section">
-				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} closeHamster={closeHamster}/>
+				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster}/>
 			</section>		
 		}
 		</section>
