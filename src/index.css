@@ -2,6 +2,10 @@
 	font-family: Margarine;
 	src: url('./assets/fonts/Margarine-Regular.ttf');
 }
+@font-face {
+	font-family: Catamaran;
+	src: url('./assets/fonts/Catamaran-Regular.ttf');
+}
 * {
 	margin: 0;
 }
@@ -10,4 +14,7 @@
 	--color2: rgb(229, 207, 182);
 	--color3: rgb(175, 149, 118);
 	--color4: rgb(6, 121, 24);
+}
+html {
+	background-color: var(--color1);
 }

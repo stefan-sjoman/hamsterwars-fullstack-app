@@ -3,6 +3,8 @@
 	display: flex;
 	flex-direction: column;
 	background-color: var(--color1);
+	font-family: Catamaran, sans-serif;
+	font-weight: 600;
 }
 header {
 	padding: 2em 0em;
@@ -13,6 +15,9 @@ header {
 h1 {
 	display: inline;
 	font-size: 4em;
+}
+h2, h3 {
+	font-family: Margarine;
 }
 main {
 
@@ -39,4 +44,15 @@ nav a {
 }
 .active-route {
 	color: white;
+}
+.close-btn {
+	background-color: var(--color4);
+	color: white;
+	border: 4px solid white;
+	border-radius: 1em;
+	min-width: 8em;
+	min-height: 3em;
+	font-family: Margarine;
+	font-size: 1em;
+	cursor: pointer;
 }

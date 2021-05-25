@@ -1,4 +1,10 @@
 .gallery-comp {
+	
+}
+.gallery-section {
 	display: grid;
 	grid-template-columns: repeat(4, auto);
+}
+.open-hamster-section {
+
 }

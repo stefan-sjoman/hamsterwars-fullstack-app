@@ -1,0 +1,29 @@
+.hamster-info {
+	width: 240px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--color2);
+	border: 0.3em solid var(--color3);
+	border-radius: 3em;
+	margin: 1em auto;
+	padding: 1em;
+}
+.hamster-info img {
+	width: 240px;
+	height: 240px;
+	object-fit: cover;
+	border-radius: 2em;
+}
+.hamster-info dl {
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto auto;
+	margin-bottom: 1em;
+}
+.hamster-info dt {
+	text-align: left;
+}
+.hamster-info dd {
+	text-align: right;
+}
