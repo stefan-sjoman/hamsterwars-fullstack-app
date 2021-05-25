@@ -14,6 +14,11 @@
 	--color2: rgb(229, 207, 182);
 	--color3: rgb(175, 149, 118);
 	--color4: rgb(6, 121, 24);
+
+	/* Breakpoints for smaller screens */
+	--breakpoint1: 850px;
+	--breakpoint2: 650px;
+	--breakpoint3: 450px;
 }
 html {
 	background-color: var(--color1);

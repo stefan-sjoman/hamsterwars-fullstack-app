@@ -25,8 +25,8 @@ function App() {
 		<Router>
 		<div className="app">
 			<header>
+				<h1><Link to="/">HAMSTERWARS</Link></h1>
 				<nav>
-					<h1><Link to="/">HAMSTERWARS</Link></h1>
 					<NavLink to="/battle" activeClassName="active-route">TÄVLA</NavLink>
 					<NavLink to="/gallery" activeClassName="active-route">GALLERI</NavLink>
 					<NavLink to="/statistics" activeClassName="active-route">STATISTIK</NavLink>

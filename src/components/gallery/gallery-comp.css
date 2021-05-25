@@ -8,3 +8,18 @@
 .open-hamster-section {
 
 }
+@media only screen and (max-width: 850px) {
+	.gallery-section {
+		grid-template-columns: repeat(3, auto);
+	}
+}
+@media only screen and (max-width: 650px) {
+	.gallery-section {
+		grid-template-columns: repeat(2, auto);
+	}
+}
+@media only screen and (max-width: 450px) {
+	.gallery-section {
+		grid-template-columns: repeat(1, auto);
+	}
+}
