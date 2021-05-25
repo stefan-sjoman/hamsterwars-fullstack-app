@@ -10,10 +10,10 @@ header {
 	padding: 2em 0em;
 	display: flex;
 	background-color: var(--color3);
-	font-family: Margarine;
 }
 h1 {
 	display: inline;
+	font-family: Margarine;
 	font-size: 4em;
 }
 h2, h3 {
@@ -39,6 +39,7 @@ h1 a {
 	margin: 0.2em;
 }
 nav a {
+	font-weight: 500;
 	color: var(--color2);
 	text-decoration: none;
 	padding: 0.5em;

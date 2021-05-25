@@ -22,38 +22,34 @@ const BattleComp = () => {
 		
 	}, [])
 
-	async function voting(num:number) {
-		alert("Röstat på: " + num);
+	async function voting(winner:Hamster | null, loser:Hamster | null) {
 
-		let winner:Hamster;
-		let loser:Hamster;
-
-		if (randomHamster1 !== null && randomHamster2 !== null) {
-			if (num === 1) {
-				winner = randomHamster1;
-				loser = randomHamster2;
+		if (winner && loser) {
+			const winnerUpdate = {
+				wins: winner.wins + 1,
+				games: winner.games + 1
 			}
-			else {
-				loser = randomHamster1;
-				winner = randomHamster2;
-			}	
-			winner.wins++;
-			winner.games++;
-			loser.defeats++;
-			loser.games++;
-
-			fetch(`/hamsters/${winner.firestoreId}`, {method: 'PUT', headers: {
-				'Content-type': 'application/json'}, body: JSON.stringify(winner)});
-			fetch(`/hamsters/${loser.firestoreId}`, {method: 'PUT', headers: {
-				'Content-type': 'application/json'}, body: JSON.stringify(loser)});
+			const loserUpdate = {
+				defeats: loser.defeats + 1,
+				games: loser.games + 1 
+			}
+			
+			putHamster(winner.firestoreId, winnerUpdate);
+			putHamster(loser.firestoreId, loserUpdate);
 		}
 	}
 
+	async function putHamster(firestoreId:string, hamsterUpdate:any) {
+		const putResponse = await fetch(`/hamsters/${firestoreId}`, {method: 'PUT', headers: {
+			'Content-type': 'application/json'}, body: JSON.stringify(hamsterUpdate)});
+		const resData2 = await putResponse.json();
+		console.log(resData2);
+	}
 	return (
 		<section className="battle-comp">
-			<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(1)} />
+			<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} />
 			<div className="battle-comp-vs">VS</div>
-			<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(2)}/>
+			<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)}/>
 		</section>
 	);
 }
