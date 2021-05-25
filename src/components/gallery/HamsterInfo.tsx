@@ -2,11 +2,12 @@ import { Hamster } from '../../types/hamster-interface';
 import './hamster-info.css';
 
 interface Props {
-	hamster: Hamster | null;
-	closeHamster: () => void;
+	buttonText: string
+	hamster: Hamster | null
+	closeHamster: () => void
 }
 
-const HamsterInfo = ({hamster, closeHamster}:Props) => {
+const HamsterInfo = ({buttonText, hamster, closeHamster}:Props) => {
 
 	return (
 		hamster ? 
@@ -24,7 +25,7 @@ const HamsterInfo = ({hamster, closeHamster}:Props) => {
 				<dt>Matcher:</dt>
 				<dd>{hamster.games + " st"}</dd>
 			</dl>
-			<button className="close-btn" onClick={closeHamster}>STÄNG</button>
+			<button className="close-btn" onClick={closeHamster}>{buttonText}</button>
 		</section>
 		: <section>
 

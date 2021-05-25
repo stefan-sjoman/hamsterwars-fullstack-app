@@ -24,7 +24,7 @@ const GalleryComp = () => {
 	return(
 		<section className="gallery-comp">
 			{
-			!showHamster ? 
+			!showHamster ?
 			<section className="gallery-section">
 				{hamsters.length > 0 ? 
 					hamsters.map(hamster => (
@@ -33,17 +33,13 @@ const GalleryComp = () => {
 						</div>		
 					))
 				: "Laddar in hamstrar..." }
-			</section>
+			</section> 
 			:	
 			<section className="open-hamster-section">
-				<HamsterInfo hamster={clickedHamster} closeHamster={closeHamster}/>
+				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} closeHamster={closeHamster}/>
 			</section>		
 		}
 		</section>
-		
-			
-			
-		
 	);
 }
 

@@ -1,0 +1,8 @@
+.battle-comp {
+	display: flex;
+	align-items: center;
+}
+.battle-comp-vs {
+	font-family: Margarine;
+	font-size: 4em;
+}
