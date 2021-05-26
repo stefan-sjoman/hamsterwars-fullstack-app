@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import HamsterInfo from "../gallery/HamsterInfo";
 import ResultComp from './ResultComp';
-import HamsterCard from "../gallery/HamsterCard";
 import './battle-comp.css';
 import { Hamster } from '../../types/hamster-interface';
 
@@ -10,17 +9,19 @@ const BattleComp = () => {
 	const [randomHamster1, setRandomHamster1] = useState<Hamster | null>(null);
 	const [randomHamster2, setRandomHamster2] = useState<Hamster | null>(null);
 	const [hasVoted, setHasVoted] = useState(false);
+	const [runUseEffect, setRunUseEffect] = useState(true);
 
 	useEffect(() => {
 		async function getRandomHamster(setHamster:(data:any) => void) {
 			const response = await fetch('/hamsters/random', {method: 'GET'});
 			const data = await response.json();
 			setHamster(data);
+			setHasVoted(false)
 		}
 		getRandomHamster(setRandomHamster1);
 		getRandomHamster(setRandomHamster2);
 		//TODO Kan bli samma hamster!!!
-	}, [])
+	}, [runUseEffect])
 
 	async function voting(winner:Hamster | null, loser:Hamster | null) {
 
@@ -57,7 +58,10 @@ const BattleComp = () => {
 			)
 		} else {
 			return (
-				<ResultComp randomHamster1={randomHamster1} randomHamster2={randomHamster2}/>
+				<section className="after-battle">
+					<ResultComp randomHamster1={randomHamster1} randomHamster2={randomHamster2}/>
+					<button className="basic-btn" onClick={() =>setRunUseEffect(!runUseEffect)}>TÄVLA IGEN</button>
+				</section>
 			)
 		}
 	}
