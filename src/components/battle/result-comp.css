@@ -1,0 +1,21 @@
+
+.result-comp {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+.result-comp > div {
+	margin: 0.5em;
+}
+.result-comp-vs {
+	font-family: Margarine;
+	font-size: 2em;
+}
+.result-comp li {
+	text-align: center;
+}
+.hamster-card:hover{
+	transform: none;
+	cursor: auto;
+}

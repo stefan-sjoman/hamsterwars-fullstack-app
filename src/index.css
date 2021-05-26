@@ -8,6 +8,7 @@
 }
 * {
 	margin: 0;
+	padding: 0;
 }
 :root {
 	--color1: rgb(136, 228, 151);
@@ -22,4 +23,7 @@
 }
 html {
 	background-color: var(--color1);
+}
+ul {
+	list-style: none;
 }

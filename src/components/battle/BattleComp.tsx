@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import HamsterInfo from "../gallery/HamsterInfo";
+import ResultComp from './ResultComp';
 import HamsterCard from "../gallery/HamsterCard";
 import './battle-comp.css';
 import { Hamster } from '../../types/hamster-interface';
@@ -41,36 +42,30 @@ const BattleComp = () => {
 	async function putHamster(firestoreId:string, hamsterUpdate:any) {
 		const putResponse = await fetch(`/hamsters/${firestoreId}`, {method: 'PUT', headers: {
 			'Content-type': 'application/json'}, body: JSON.stringify(hamsterUpdate)});
-		const resData2 = await putResponse.text();
-		console.log(resData2);
+		const putData = await putResponse.text();
+		console.log(putData);
 	}
-	return (
-		<section className="battle-comp">
-			{ !hasVoted?
+
+	function voteOrvoted () {
+		if (!hasVoted) {
+			return (
 				<section className="battle-section">
 					<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} />
 					<div className="battle-comp-vs">VS</div>
 					<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)}/>
 				</section>
-			:	
-			<section className="after-battle">	
-				<div>
-					<HamsterCard hamster={randomHamster1}/>
-					<div>
-						<p>Vinster: {randomHamster1? randomHamster1.wins: ""}</p>	
-						<p>Förluster: {randomHamster1? randomHamster1.defeats : ""}</p>	
-					</div> 
-				</div> 
-				<div className="battle-comp-vs">VS</div>
-				<div>
-				<HamsterCard hamster={randomHamster2}/>
-					<div>
-						<p>Vinster: {randomHamster2? randomHamster2.wins: ""}</p>
-						<p>Förluster: {randomHamster2? randomHamster2.defeats : ""}</p>
-					</div>
-				</div>
-			</section>
-			}		
+			)
+		} else {
+			return (
+				<ResultComp randomHamster1={randomHamster1} randomHamster2={randomHamster2}/>
+			)
+		}
+	}
+	const voteOrResult = voteOrvoted();
+
+	return (
+		<section className="battle-comp">
+			{ voteOrResult }		
 		</section>
 	);
 }

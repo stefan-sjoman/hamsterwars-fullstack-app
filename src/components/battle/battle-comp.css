@@ -1,6 +1,4 @@
-.battle-comp {
 
-}
 .battle-section {
 	display: flex;
 	align-items: center;
@@ -8,10 +6,6 @@
 .battle-comp-vs {
 	font-family: Margarine;
 	font-size: 4em;
-}
-.after-battle {
-	display: flex;
-	align-items: center;
 }
 @media only screen and (max-width: 650px) {
 	.battle-comp {
