@@ -2,10 +2,12 @@ import { Hamster } from '../../types/hamster-interface';
 import './hamster-card.css';
 
 interface Props {
-	hamster: Hamster
+	hamster: Hamster | null
 }
 
 const HamsterCard = ({hamster}:Props) => {
+
+	if (hamster === null) return null
 
 	const hamsterImage = `img/${hamster.imgName}`;
 

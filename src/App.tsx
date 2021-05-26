@@ -12,7 +12,7 @@ import allHamsters from './atoms/atoms';
 
 function App() {
 
-	const [hamsters, setHamsters] = useRecoilState(allHamsters);
+	const [hamsters, setHamsters] = useRecoilState(allHamsters); //useSetRecoilState
 	useEffect(() => {
 		async function getHamsters() {
 			const response = await fetch('/hamsters', {method: 'GET'});
@@ -20,7 +20,7 @@ function App() {
 			setHamsters(data);
 		}
 		getHamsters();
-		console.log("TA BORT" , hamsters); // HUR TA BORT???
+		console.log("TA BORT" , hamsters); // HUR TA BORT??? useSetRecoilState
 	}, [])
 
   	return (

@@ -1,12 +1,13 @@
-.gallery-comp {
-	
-}
+
 .gallery-section {
 	display: grid;
-	grid-template-columns: repeat(4, auto);
+	grid-template-columns: repeat(5, auto);
 }
-.open-hamster-section {
 
+@media only screen and (max-width: 1050px) {
+	.gallery-section {
+		grid-template-columns: repeat(4, auto);
+	}
 }
 @media only screen and (max-width: 850px) {
 	.gallery-section {
