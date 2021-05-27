@@ -1,0 +1,15 @@
+.error-comp {
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--color2);
+	border: 0.3em solid var(--color3);
+	border-radius: 3em;
+	margin: 1em auto;
+	padding: 1em;
+}
+
+.error-comp p {
+	padding: 3em;
+}

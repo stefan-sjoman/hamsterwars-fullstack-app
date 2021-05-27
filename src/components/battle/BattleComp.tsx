@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil';
+import allHamsters from '../../atoms/atoms';
 import HamsterInfo from "../gallery/HamsterInfo";
 import ResultComp from './ResultComp';
 import './battle-comp.css';
@@ -6,12 +8,21 @@ import { Hamster } from '../../types/hamster-interface';
 
 const BattleComp = () => {
 
+	const [hamsters, setHamsters] = useRecoilState(allHamsters); //useSetRecoilState
 	const [randomHamster1, setRandomHamster1] = useState<Hamster | null>(null);
 	const [randomHamster2, setRandomHamster2] = useState<Hamster | null>(null);
 	const [hasVoted, setHasVoted] = useState(false);
 	const [runUseEffect, setRunUseEffect] = useState(true);
 
 	useEffect(() => {
+		async function getHamsters() {
+			const response = await fetch('/hamsters', {method: 'GET'});
+			const data = await response.json();
+			setHamsters(data);
+		}
+		getHamsters();
+
+		console.log("TA BORT" , hamsters); // HUR TA BORT??? useSetRecoilState
 		async function getRandomHamster(setHamster:(data:any) => void) {
 			const response = await fetch('/hamsters/random', {method: 'GET'});
 			const data = await response.json();
@@ -20,7 +31,7 @@ const BattleComp = () => {
 		}
 		getRandomHamster(setRandomHamster1);
 		getRandomHamster(setRandomHamster2);
-		//TODO Kan bli samma hamster!!!
+		getHamsters();
 	}, [runUseEffect])
 
 	async function voting(winner:Hamster | null, loser:Hamster | null) {
@@ -36,6 +47,8 @@ const BattleComp = () => {
 			}
 			putHamster(winner.firestoreId, winnerUpdate);
 			putHamster(loser.firestoreId, loserUpdate);
+			postMatch(winner.firestoreId, loser.firestoreId);
+			setRunUseEffect(!runUseEffect);
 			setHasVoted(true);
 		}
 	}
@@ -45,6 +58,13 @@ const BattleComp = () => {
 			'Content-type': 'application/json'}, body: JSON.stringify(hamsterUpdate)});
 		const putData = await putResponse.text();
 		console.log(putData);
+	}
+	async function postMatch(winnerId:string, loserId:string) {
+		const match = {winnerId: winnerId, loserId: loserId}
+		const postMatchResponse = await fetch(`/matches`, {method: 'POST', headers: {
+			'Content-type': 'application/json'}, body: JSON.stringify(match)});
+		const postMatchData = await postMatchResponse.text();
+		console.log(postMatchData);
 	}
 
 	function voteOrvoted () {
@@ -59,6 +79,7 @@ const BattleComp = () => {
 		} else {
 			return (
 				<section className="after-battle">
+					{/* get hamster with id för att få uppdaterad information!*/}
 					<ResultComp randomHamster1={randomHamster1} randomHamster2={randomHamster2}/>
 					<button className="basic-btn" onClick={() =>setRunUseEffect(!runUseEffect)}>TÄVLA IGEN</button>
 				</section>

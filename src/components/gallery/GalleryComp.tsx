@@ -21,24 +21,32 @@ const GalleryComp = () => {
 		setShowHamster(false);
 	}
 
+	function showGalleryOrHamster() {
+		if (!showHamster) {
+			return (
+				<section className="gallery-section">
+					{hamsters.length > 0 ? 
+						hamsters.map(hamster => (
+							<div onClick={() => openHamster(hamster)} key={hamster.firestoreId}>
+								<HamsterCard hamster={hamster} />
+							</div>		
+						))
+					: "Laddar in hamstrar..." }
+				</section> 
+			)
+		} else {
+			return (
+				<section className="open-hamster-section">
+				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster}/>
+			</section>	
+			)
+		}
+	}
+	const galleryOrHamster = showGalleryOrHamster();
+		
 	return(
 		<section className="gallery-comp">
-			{
-			!showHamster ?
-			<section className="gallery-section">
-				{hamsters.length > 0 ? 
-					hamsters.map(hamster => (
-						<div onClick={() => openHamster(hamster)} key={hamster.firestoreId}>
-							<HamsterCard hamster={hamster} />
-						</div>		
-					))
-				: "Laddar in hamstrar..." }
-			</section> 
-			:	
-			<section className="open-hamster-section">
-				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster}/>
-			</section>		
-		}
+			{galleryOrHamster}
 		</section>
 	);
 }

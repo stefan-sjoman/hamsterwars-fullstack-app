@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, NavLink} from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import './App.css';
@@ -8,14 +8,18 @@ import StatisticsComp from './components/statistics/StatisticsComp';
 import StartComp from './components/start/StartComp';
 import HistoryComp from './components/history/HistoryComp';
 import allHamsters from './atoms/atoms';
+import ErrorComp from './components/error/ErrorComp';
 
 
 function App() {
 
 	const [hamsters, setHamsters] = useRecoilState(allHamsters); //useSetRecoilState
+	const [contactDb, setContactDb] = useState(true);
+
 	useEffect(() => {
 		async function getHamsters() {
 			const response = await fetch('/hamsters', {method: 'GET'});
+			if (response.status !== 200) setContactDb(false);
 			const data = await response.json();
 			setHamsters(data);
 		}
@@ -26,6 +30,7 @@ function App() {
   	return (
 		<Router>
 		<div className="app">
+			
 			<header>
 				<h1><Link to="/">HAMSTERWARS</Link></h1>
 				<nav>
@@ -36,13 +41,17 @@ function App() {
 				</nav>
 			</header>
 			<main>
-			<Switch>
-				<Route path="/gallery"><GalleryComp /></Route>
-				<Route path="/battle"><BattleComp /></Route>
-				<Route path="/statistics"><StatisticsComp /></Route>
-				<Route path="/history"><HistoryComp /></Route>
-				<Route path="/"><StartComp /></Route>
-			</Switch>
+			{contactDb ? 
+				<Switch>
+					<Route path="/gallery"><GalleryComp /></Route>
+					<Route path="/battle"><BattleComp /></Route>
+					<Route path="/statistics"><StatisticsComp /></Route>
+					<Route path="/history"><HistoryComp /></Route>
+					<Route path="/"><StartComp /></Route>
+				</Switch>
+			:
+				<ErrorComp />	
+			}
 			</main>
 		</div>
 		</Router>
