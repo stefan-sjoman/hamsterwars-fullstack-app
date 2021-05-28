@@ -1,18 +1,18 @@
 
-.result-comp {
+.result-comp-inner {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 1em;
 }
-.result-comp > div {
+.result-comp-inner > div {
 	margin: 0.5em;
 }
 .result-comp-vs {
 	font-family: Margarine;
 	font-size: 2em;
 }
-.result-comp li {
+.result-comp-inner li {
 	text-align: center;
 }
 .hamster-card:hover{

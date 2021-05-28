@@ -9,7 +9,7 @@ const StartComp = () => {
 			</p>
 			<div>
 				<Link to="/battle"><button className="basic-btn">TÄVLA</button></Link>
-				<Link to="/gallery"><button className="basic-btn">GALLERY</button></Link>
+				<Link to="/gallery"><button className="basic-btn">GALLERI</button></Link>
 			</div>
 		</section>
 	);

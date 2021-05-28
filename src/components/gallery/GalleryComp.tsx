@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import allHamsters from '../../atoms/atoms';
+import { allHamsters } from '../../atoms/atoms';
 import HamsterInfo from './HamsterInfo';
 import HamsterCard from './HamsterCard';
 import { Hamster } from '../../types/hamster-interface';

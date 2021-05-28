@@ -7,7 +7,7 @@ import BattleComp from './components/battle/BattleComp';
 import StatisticsComp from './components/statistics/StatisticsComp';
 import StartComp from './components/start/StartComp';
 import HistoryComp from './components/history/HistoryComp';
-import allHamsters from './atoms/atoms';
+import {allHamsters, runGetHamsters} from './atoms/atoms';
 import ErrorComp from './components/error/ErrorComp';
 
 
@@ -15,8 +15,10 @@ function App() {
 
 	const [hamsters, setHamsters] = useRecoilState(allHamsters); //useSetRecoilState
 	const [contactDb, setContactDb] = useState(true);
+	const [runUseEffect, setRunUseEffect] = useRecoilState(runGetHamsters);
 
 	useEffect(() => {
+		if (!runUseEffect) return;
 		async function getHamsters() {
 			const response = await fetch('/hamsters', {method: 'GET'});
 			if (response.status !== 200) setContactDb(false);
@@ -24,8 +26,9 @@ function App() {
 			setHamsters(data);
 		}
 		getHamsters();
+		setRunUseEffect(false);
 		console.log("TA BORT" , hamsters); // HUR TA BORT??? useSetRecoilState
-	}, [])
+	}, [runUseEffect])
 
   	return (
 		<Router>

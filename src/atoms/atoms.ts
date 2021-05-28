@@ -7,4 +7,9 @@ const allHamsters = atom({
 	]
 });
 
-export default allHamsters
+const runGetHamsters = atom({
+	key: 'runGetHamsters',
+	default: true
+})
+
+export { allHamsters, runGetHamsters }
