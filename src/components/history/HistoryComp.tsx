@@ -1,4 +1,5 @@
-import ResultComp from "../battle/ResultComp";
+
+import HamsterCard from "../gallery/HamsterCard";
 import './history-comp.css';
 
 const HistoryComp = () => {
@@ -19,16 +20,26 @@ const HistoryComp = () => {
 		<section className="history-comp">
 			<h2>SENASTE MATCHER</h2>
 			<section className="games-section">
-				<div className="games-header">
-					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
-				</div>
-				<ResultComp hamster1={tempHamster} hamster2={tempHamster}/>
-				<div className="games-header">
-					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
-				</div>
-				<ResultComp hamster1={tempHamster} hamster2={tempHamster}/>
-				<div className="games-header">
-					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
+				<div className="one-game">
+					<div className="game-winner">
+						<h3 className="games-header">VINNARE</h3>
+						<HamsterCard hamster={tempHamster}/>
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</div>
+					<div className="vs-div">VS</div>
+					<div className="game-loser">
+						<h3 className="games-header">FÖRLORARE</h3>
+						<HamsterCard hamster={tempHamster}/>
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</div>
 				</div>
 			</section>
 		</section>

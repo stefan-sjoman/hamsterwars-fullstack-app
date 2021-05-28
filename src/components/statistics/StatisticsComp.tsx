@@ -1,26 +1,111 @@
+import HamsterCard from '../gallery/HamsterCard'
 import './statistics-comp.css'
 
 const StatisticsComp = () => {
+
+	let tempHamster = {
+		"name": "Alma",
+		"favFood": "ananas",
+		"wins": 5,
+		"age": 3,
+		"loves": "bli klappad",
+		"defeats": 17,
+		"imgName": "hamster-35.jpg",
+		"games": 25,
+		"firestoreId": "0S4wKVHGdkWKIpygFz9Y"
+	}
+
 	return( 
 		<section className="statistics-comp">
 			<div>
 				<h2>TOPP 5</h2>
 				<ol>
-					<li>Pelle Vinster: 290st</li>
-					<li>Olle Vinster: 245st</li>
-					<li>Kalle Vinster: 203st</li>
-					<li>Ulla Vinster: 198st</li>
-					<li>Elle Vinster: 174st</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+
 				</ol>
 			</div>
 			<div>
 				<h2>SISTA 5</h2>
 				<ol>
-					<li>Pelle Förluster: 290st</li>
-					<li>Olle Förluster: 245st</li>
-					<li>Kalle Förluster: 203st</li>
-					<li>Ulla Förluster: 198st</li>
-					<li>Elle Förluster: 174st</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
+					<li>
+						<HamsterCard hamster={tempHamster} />
+						<ul>
+							<li>Vinster: {tempHamster.wins}</li>
+							<li>Förluster: {tempHamster.defeats}</li>
+							<li>Matcher: {tempHamster.games}</li>
+						</ul>
+					</li>
 				</ol>
 			</div>
 		</section>

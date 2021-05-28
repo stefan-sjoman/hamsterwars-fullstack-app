@@ -1,29 +1,20 @@
+
 .history-comp {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	margin: 1em;
 }
-.games-section {
-	display: flex;
-	flex-direction: column;
-}
-.games-header {
-	display: flex;
+.history-comp .one-game {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
 	justify-content: space-between;
-}
-.winner-section {
+	align-items: center;
 	text-align: center;
-	padding: 0.5em
+	padding: 1em;
 }
-.loser-section {
-	text-align: center;
-	padding: 0.5em
-}
-.vs-div {
+.history-comp .vs-div {
 	font-family: Margarine;
 	font-size: 2em;
-}
-.history-comp ul {
-	font-size: 1em;
+	margin: 0em 1em;
 }
