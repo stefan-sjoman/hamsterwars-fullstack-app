@@ -1,38 +1,13 @@
 import HamsterCard from '../gallery/HamsterCard';
 import { Hamster } from '../../types/hamster-interface';
 import './result-comp.css';
-import { useEffect, useState } from 'react';
 
 interface Props {
-	randomHamster1: Hamster | null
-	randomHamster2: Hamster | null
+	hamster1: Hamster | null | any
+	hamster2: Hamster | null | any
 }
 
-const ResultComp = ({randomHamster1, randomHamster2}:Props) => {
-
-	const [hamster1, setHamster1] = useState<Hamster | null | any>(null); // TODO any är för getHamsterWithId
-	const [hamster2, setHamster2] = useState<Hamster | null | any>(null);
-
-	async function getHamsterWithId(firestoreId:string) {
-		const getHamsterWithIdResponse = await fetch(`/hamsters/${firestoreId}`, {method: 'GET'});
-		const getHamsterWithIdData = await getHamsterWithIdResponse.json();
-		console.log(getHamsterWithIdData);
-		return getHamsterWithIdData;
-	}
-	async function updateRandomHamsters() {
-		if (randomHamster1 && randomHamster2) {
-		const hamsterTemp1 = await getHamsterWithId(randomHamster1.firestoreId)
-		const hamsterTemp2 = await getHamsterWithId(randomHamster2.firestoreId);
-		setHamster1(hamsterTemp1);
-		console.log('hamstertemp1',hamsterTemp1);
-		setHamster2(hamsterTemp2);
-		}
-	}
-	useEffect(() => {
-		if (randomHamster1 && randomHamster2) {
-			updateRandomHamsters();
-		}
-	})
+const ResultComp = ({hamster1, hamster2}:Props) => {
 
 	function loadingOrResult() {
 		if (hamster1 && hamster2) {

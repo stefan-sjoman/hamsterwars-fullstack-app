@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link, NavLink} from 'react-rout
 import { useRecoilState } from 'recoil';
 import './App.css';
 import GalleryComp from './components/gallery/GalleryComp';
-import BattleComp from './components/battle/BattleComp';
+import BattleComp2 from './components/battle/BattleComp2';
 import StatisticsComp from './components/statistics/StatisticsComp';
 import StartComp from './components/start/StartComp';
 import HistoryComp from './components/history/HistoryComp';
@@ -47,7 +47,7 @@ function App() {
 			{contactDb ? 
 				<Switch>
 					<Route path="/gallery"><GalleryComp /></Route>
-					<Route path="/battle"><BattleComp /></Route>
+					<Route path="/battle"><BattleComp2 /></Route>
 					<Route path="/statistics"><StatisticsComp /></Route>
 					<Route path="/history"><HistoryComp /></Route>
 					<Route path="/"><StartComp /></Route>

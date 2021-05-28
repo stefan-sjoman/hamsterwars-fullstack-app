@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil';
-import { runGetHamsters } from '../../atoms/atoms';
+import { useEffect, useState } from "react";
+import { Hamster } from "../../types/hamster-interface";
 import HamsterInfo from "../gallery/HamsterInfo";
-import ResultComp from './ResultComp';
-import { Hamster } from '../../types/hamster-interface';
-import './battle-comp.css';
+import ResultComp from "./ResultComp";
 
-const BattleComp = () => {
 
-	const [getHamsters, setGetHamster] = useRecoilState(runGetHamsters) // TODO Ta bort icke använt!?
+
+const BattleComp2 = () => {
+
 	const [randomHamster1, setRandomHamster1] = useState<Hamster | null >(null);
 	const [randomHamster2, setRandomHamster2] = useState<Hamster | null >(null);
 	const [hasVoted, setHasVoted] = useState(false);
-	const [runUseEffect, setRunUseEffect] = useState(true);
+
+	let updatedWinner:Promise<any>
+	let updatedLoser:Promise<any>
 
 	useEffect(() => {
 		async function getRandomHamster(setHamster:(data:any) => void) {
@@ -23,10 +23,16 @@ const BattleComp = () => {
 		}
 		getRandomHamster(setRandomHamster1);
 		getRandomHamster(setRandomHamster2);
-	}, [runUseEffect])
+	}, [])
+
+	async function getHamsterWithId(firestoreId:string) {
+		const getHamsterWithIdResponse = await fetch(`/hamsters/${firestoreId}`, {method: 'GET'});
+		const getHamsterWithIdData = await getHamsterWithIdResponse.json();
+		console.log(getHamsterWithIdData);
+		return getHamsterWithIdData;
+	}
 
 	async function voting(winner:Hamster | null, loser:Hamster | null) {
-
 		if (winner && loser) {
 			const winnerUpdate = {
 				wins: winner.wins + 1,
@@ -42,14 +48,17 @@ const BattleComp = () => {
 				postMatch(winner.firestoreId, loser.firestoreId)
 			]).then((values) => {
 				console.log(values);
-				setHasVoted(true);
-				setGetHamster(true);	
-			});
-			// await putHamster(winner.firestoreId, winnerUpdate);
-			// await putHamster(loser.firestoreId, loserUpdate);
-			// await postMatch(winner.firestoreId, loser.firestoreId);
+				
+				updateHamsters(winner, loser)
 
+				setHasVoted(true);
+			});
 		}
+	}
+
+	async function updateHamsters(winner:any, loser:any){
+		updatedWinner = await getHamsterWithId(winner.firestoreId);
+		updatedLoser = await getHamsterWithId(loser.firestoreId);
 	}
 
 	async function putHamster(firestoreId:string, hamsterUpdate:any) {
@@ -78,8 +87,8 @@ const BattleComp = () => {
 		} else {
 			return (
 				<section className="after-battle">
-					<ResultComp randomHamster1={randomHamster1} randomHamster2={randomHamster2}/>
-					<button className="basic-btn" onClick={() =>setRunUseEffect(!runUseEffect)}>TÄVLA IGEN</button>
+					<ResultComp hamster1={updatedWinner} hamster2={updatedLoser}/>
+					{/* <button className="basic-btn" onClick={() =>setRunUseEffect(!runUseEffect)}>TÄVLA IGEN</button> */}
 				</section>
 			)
 		}
@@ -93,4 +102,4 @@ const BattleComp = () => {
 	);
 }
 
-export default BattleComp;
+export default BattleComp2;

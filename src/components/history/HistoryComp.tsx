@@ -22,23 +22,14 @@ const HistoryComp = () => {
 				<div className="games-header">
 					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
 				</div>
-				<ResultComp randomHamster1={tempHamster} randomHamster2={tempHamster}/>
+				<ResultComp hamster1={tempHamster} hamster2={tempHamster}/>
 				<div className="games-header">
 					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
 				</div>
-				<ResultComp randomHamster1={tempHamster} randomHamster2={tempHamster}/>
+				<ResultComp hamster1={tempHamster} hamster2={tempHamster}/>
 				<div className="games-header">
 					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
 				</div>
-				<ResultComp randomHamster1={tempHamster} randomHamster2={tempHamster}/>
-				<div className="games-header">
-					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
-				</div>
-				<ResultComp randomHamster1={tempHamster} randomHamster2={tempHamster}/>
-				<div className="games-header">
-					<h3>VINNARE</h3><h3>FÖRLORARE</h3>
-				</div>
-				<ResultComp randomHamster1={tempHamster} randomHamster2={tempHamster}/>
 			</section>
 		</section>
 	);
