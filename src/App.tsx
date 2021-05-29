@@ -21,7 +21,7 @@ function App() {
 		if (!runUseEffect) return;
 		async function getHamsters() {
 			const response = await fetch('/hamsters', {method: 'GET'});
-			if (response.status !== 200) setContactDb(false);
+			//if (response.status !== 200) setContactDb(false);
 			const data = await response.json();
 			setHamsters(data);
 		}

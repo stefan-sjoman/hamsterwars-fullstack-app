@@ -1,8 +1,11 @@
+import { useState } from 'react'
+import { Hamster } from '../../types/hamster-interface'
 import HamsterCard from '../gallery/HamsterCard'
 import './statistics-comp.css'
 
 const StatisticsComp = () => {
 
+	/*********************************************** */
 	let tempHamster = {
 		"name": "Alma",
 		"favFood": "ananas",
@@ -14,99 +17,52 @@ const StatisticsComp = () => {
 		"games": 25,
 		"firestoreId": "0S4wKVHGdkWKIpygFz9Y"
 	}
+	let tempArray:Hamster[] = [tempHamster,tempHamster,tempHamster,tempHamster,tempHamster];
 
+	/**************************************************/
+
+	const [topHamsterArray, setTopHamsterArray] = useState<Hamster[]>(tempArray);
+	const [bottomHamsterArray, setBottomHamsterArray] = useState<Hamster[]>(tempArray);
+
+	function listHamsters(hamster:Hamster) {
+		return (
+			<li key={hamster.firestoreId}>
+				<HamsterCard hamster={hamster} />
+				<dl>
+					<dt>Vinster:</dt>
+					<dd>{hamster.wins}</dd>
+					<dt>Förluster:</dt>
+					<dd>{hamster.defeats}</dd>
+					<dt>Matcher:</dt>
+					<dd>{hamster.games}</dd>
+				</dl>
+			</li>
+		)
+	}
+	
+	function getHamsters(hamsterArray:Hamster[]) {
+		const content = hamsterArray.map(hamster => 
+			listHamsters(hamster)
+		)
+		return (
+			<ol>
+				{content}
+			</ol>
+		)
+	}
+	
+	const topHamsters = getHamsters(topHamsterArray);
+	const bottomHamsters = getHamsters(bottomHamsterArray);
+	
 	return( 
 		<section className="statistics-comp">
 			<div>
 				<h2>TOPP 5</h2>
-				<ol>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-
-				</ol>
+				{ topHamsters }	
 			</div>
 			<div>
 				<h2>SISTA 5</h2>
-				<ol>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-					<li>
-						<HamsterCard hamster={tempHamster} />
-						<ul>
-							<li>Vinster: {tempHamster.wins}</li>
-							<li>Förluster: {tempHamster.defeats}</li>
-							<li>Matcher: {tempHamster.games}</li>
-						</ul>
-					</li>
-				</ol>
+				{ bottomHamsters }	
 			</div>
 		</section>
 	);

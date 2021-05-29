@@ -15,6 +15,7 @@
 	--color2: rgb(255, 230, 200);
 	--color3: rgb(175, 149, 118);
 	--color4: rgb(6, 121, 24);
+	--color5: rgb(50, 90, 56);
 }
 html {
 	background-color: var(--color1);

@@ -12,11 +12,11 @@ const GalleryComp = () => {
 	const [clickedHamster, setClickedHamster] = useState<null | Hamster>(null)
 	const [showHamster, setShowHamster] = useState(false);
 
-
 	function openHamster(hamster:Hamster) {
 		setShowHamster(true);
 		setClickedHamster(hamster);
 	}
+
 	function closeHamster() {
 		setShowHamster(false);
 	}
@@ -42,6 +42,7 @@ const GalleryComp = () => {
 			)
 		}
 	}
+	
 	const galleryOrHamster = showGalleryOrHamster();
 		
 	return(

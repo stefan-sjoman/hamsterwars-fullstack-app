@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import { Hamster } from "../../types/hamster-interface";
 import HamsterInfo from "../gallery/HamsterInfo";
 import ResultComp from "./ResultComp";
-
+import './battle-comp.css'
+import HamsterCard from "../gallery/HamsterCard";
 
 
 const BattleComp2 = () => {
 
 	const [randomHamster1, setRandomHamster1] = useState<Hamster | null >(null);
 	const [randomHamster2, setRandomHamster2] = useState<Hamster | null >(null);
+	const [updatedWinner, setUpdatedWinner] = useState<any>(null)
+	const [updatedLoser, setUpdatedLoser] = useState<any>(null)
 	const [hasVoted, setHasVoted] = useState(false);
-
-	let updatedWinner:Promise<any>
-	let updatedLoser:Promise<any>
 
 	useEffect(() => {
 		async function getRandomHamster(setHamster:(data:any) => void) {
 			const response = await fetch('/hamsters/random', {method: 'GET'});
 			const data = await response.json();
 			setHamster(data);
-			setHasVoted(false)
+			setHasVoted(false);
 		}
 		getRandomHamster(setRandomHamster1);
 		getRandomHamster(setRandomHamster2);
@@ -33,6 +33,7 @@ const BattleComp2 = () => {
 	}
 
 	async function voting(winner:Hamster | null, loser:Hamster | null) {
+		console.log("voting winner: ", winner) //Här finns det värden.
 		if (winner && loser) {
 			const winnerUpdate = {
 				wins: winner.wins + 1,
@@ -46,9 +47,8 @@ const BattleComp2 = () => {
 				putHamster(winner.firestoreId, winnerUpdate),
 				putHamster(loser.firestoreId, loserUpdate), 
 				postMatch(winner.firestoreId, loser.firestoreId)
-			]).then((values) => {
-				console.log(values);
-				
+			]).then(() => {
+				console.log("voting winner: ", winner)
 				updateHamsters(winner, loser)
 
 				setHasVoted(true);
@@ -57,8 +57,10 @@ const BattleComp2 = () => {
 	}
 
 	async function updateHamsters(winner:any, loser:any){
-		updatedWinner = await getHamsterWithId(winner.firestoreId);
-		updatedLoser = await getHamsterWithId(loser.firestoreId);
+		const newWinner = await getHamsterWithId(winner.firestoreId);
+		setUpdatedWinner(newWinner)
+		const newLoser = await getHamsterWithId(loser.firestoreId);
+		setUpdatedLoser(newLoser);
 	}
 
 	async function putHamster(firestoreId:string, hamsterUpdate:any) {
@@ -77,20 +79,54 @@ const BattleComp2 = () => {
 
 	function voteOrResult () {
 		if (!hasVoted) {
-			return (
-				<section className="battle-section">
-					<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} />
-					<div className="battle-comp-vs">VS</div>
-					<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)}/>
-				</section>
-			)
+			if (randomHamster1 && randomHamster2) {
+				return (
+					<section className="battle-section">
+						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} />
+						<div className="battle-comp-vs">VS</div>
+						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)}/>
+					</section>
+				)
+			} else {
+				return (
+					<section className="battle-section">
+						<div>Laddar hamstrar...</div>
+					</section>
+				)
+			}
 		} else {
-			return (
+			if (updatedWinner !== null && updatedLoser !== null) {
+				return (
+					<section className="after-battle">
+						<section className="games-section">
+							<div className="one-game">
+								<div className="game-winner">
+									<HamsterCard hamster={updatedWinner}/>
+									<ul>
+										<li>Vinster: {updatedWinner.wins}</li>
+										<li>Förluster: {updatedWinner.defeats}</li>
+										<li>Matcher: {updatedWinner.games}</li>
+									</ul>
+								</div>
+								<div className="vs-div">VS</div>
+								<div className="game-loser">
+									<h3 className="games-header">FÖRLORARE</h3>
+									<HamsterCard hamster={updatedLoser}/>
+									<ul>
+										<li>Vinster: {updatedLoser.wins}</li>
+										<li>Förluster: {updatedLoser.defeats}</li>
+										<li>Matcher: {updatedLoser.games}</li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+				)
+			} else {
 				<section className="after-battle">
-					<ResultComp hamster1={updatedWinner} hamster2={updatedLoser}/>
-					{/* <button className="basic-btn" onClick={() =>setRunUseEffect(!runUseEffect)}>TÄVLA IGEN</button> */}
+					<div>Loading hamsters...</div>
 				</section>
-			)
+			}
 		}
 	}
 	const content = voteOrResult();

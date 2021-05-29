@@ -15,15 +15,3 @@
 	object-fit: cover;
 	border-radius: 2em;
 }
-.hamster-info dl {
-	width: 100%;
-	display: grid;
-	grid-template-columns: auto auto;
-	margin-bottom: 1em;
-}
-.hamster-info dt {
-	text-align: left;
-}
-.hamster-info dd {
-	text-align: right;
-}
