@@ -26,11 +26,11 @@ const HistoryComp = () => {
 						<HamsterCard hamster={tempHamster}/>
 						<dl>
 							<dt>Vinster:</dt>
-							<dd>{tempHamster.wins}</dd>
+							<dd>{tempHamster.wins + " st"}</dd>
 							<dt>Förluster:</dt>
-							<dd>{tempHamster.defeats}</dd>
+							<dd>{tempHamster.defeats + " st"}</dd>
 							<dt>Matcher:</dt>
-							<dd>{tempHamster.games}</dd>
+							<dd>{tempHamster.games + " st"}</dd>
 						</dl>
 					</div>
 					<div className="vs-div">VS</div>
@@ -39,11 +39,11 @@ const HistoryComp = () => {
 						<HamsterCard hamster={tempHamster}/>
 						<dl>
 							<dt>Vinster:</dt>
-							<dd>{tempHamster.wins}</dd>
+							<dd>{tempHamster.wins + " st"}</dd>
 							<dt>Förluster:</dt>
-							<dd>{tempHamster.defeats}</dd>
+							<dd>{tempHamster.defeats + " st"}</dd>
 							<dt>Matcher:</dt>
-							<dd>{tempHamster.games}</dd>
+							<dd>{tempHamster.games + " st"}</dd>
 						</dl>
 					</div>
 				</div>
@@ -55,11 +55,11 @@ const HistoryComp = () => {
 						<HamsterCard hamster={tempHamster}/>
 						<dl>
 							<dt>Vinster:</dt>
-							<dd>{tempHamster.wins}</dd>
+							<dd>{tempHamster.wins + " st"}</dd>
 							<dt>Förluster:</dt>
-							<dd>{tempHamster.defeats}</dd>
+							<dd>{tempHamster.defeats + " st"}</dd>
 							<dt>Matcher:</dt>
-							<dd>{tempHamster.games}</dd>
+							<dd>{tempHamster.games + " st"}</dd>
 						</dl>
 					</div>
 					<div className="vs-div">VS</div>
@@ -68,11 +68,11 @@ const HistoryComp = () => {
 						<HamsterCard hamster={tempHamster}/>
 						<dl>
 							<dt>Vinster:</dt>
-							<dd>{tempHamster.wins}</dd>
+							<dd>{tempHamster.wins + " st"}</dd>
 							<dt>Förluster:</dt>
-							<dd>{tempHamster.defeats}</dd>
+							<dd>{tempHamster.defeats + " st"}</dd>
 							<dt>Matcher:</dt>
-							<dd>{tempHamster.games}</dd>
+							<dd>{tempHamster.games + " st"}</dd>
 						</dl>
 					</div>
 				</div>

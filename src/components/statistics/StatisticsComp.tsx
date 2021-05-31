@@ -30,11 +30,11 @@ const StatisticsComp = () => {
 				<HamsterCard hamster={hamster} />
 				<dl>
 					<dt>Vinster:</dt>
-					<dd>{hamster.wins}</dd>
+					<dd>{hamster.wins + " st"}</dd>
 					<dt>Förluster:</dt>
-					<dd>{hamster.defeats}</dd>
+					<dd>{hamster.defeats + " st"}</dd>
 					<dt>Matcher:</dt>
-					<dd>{hamster.games}</dd>
+					<dd>{hamster.games + " st"}</dd>
 				</dl>
 			</li>
 		)
