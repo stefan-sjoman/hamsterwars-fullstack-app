@@ -19,6 +19,7 @@
 }
 .game-winner, .game-loser{
 	background-color: white;
+	border: 0.3em solid var(--color3);
 	border-radius: 2em;
 	padding: 1em 4em;
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Hamster } from "../../types/hamster-interface";
 import HamsterInfo from "../gallery/HamsterInfo";
-import ResultComp from "./ResultComp";
 import './battle-comp.css'
 import HamsterCard from "../gallery/HamsterCard";
 
@@ -69,6 +68,7 @@ const BattleComp2 = () => {
 		const putData = await putResponse.text();
 		console.log(putData);
 	}
+
 	async function postMatch(winnerId:string, loserId:string) {
 		const match = {winnerId: winnerId, loserId: loserId}
 		const postMatchResponse = await fetch(`/matches`, {method: 'POST', headers: {
