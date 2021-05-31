@@ -74,8 +74,6 @@ const StatisticsComp = () => {
 	console.log(topHamsters);
 	console.log(bottomHamsters);
 	
-	
-	
 	return( 
 		<section className="statistics-comp">
 			<div>

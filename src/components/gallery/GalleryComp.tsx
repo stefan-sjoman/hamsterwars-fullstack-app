@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { allHamsters } from '../../atoms/atoms';
+import { allHamsters, runGetHamsters } from '../../atoms/atoms';
 import HamsterInfo from './HamsterInfo';
 import HamsterCard from './HamsterCard';
 import { Hamster } from '../../types/hamster-interface';
@@ -9,6 +9,7 @@ import './gallery-comp.css';
 const GalleryComp = () => {
 
 	const [hamsters] = useRecoilState(allHamsters);
+	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
 	const [clickedHamster, setClickedHamster] = useState<null | Hamster>(null)
 	const [showHamster, setShowHamster] = useState(false);
 	const [showAddNew, setShowAddNew] = useState(false);
@@ -25,11 +26,6 @@ const GalleryComp = () => {
 	const [lovesError, setLovesError] = useState("");
 	const [imgNameError, setImgNameError] = useState("");
 
-	let isValidated = {
-		name: false,
-	};
-	const [isAddDisabled, setIsAddDisabled] = useState(true);
-
 	function openHamster(hamster:Hamster) {
 		setShowHamster(true);
 		setClickedHamster(hamster);
@@ -43,10 +39,8 @@ const GalleryComp = () => {
 		const name = event.target.value;
 		let validated = validateText(name);
 		if (!validated) {
-			isValidated.name = false;
 			return setNameError("Namn får vara max 32 tecken");
 		}
-		isValidated.name = true;
 		setNameError("");
 		setInputName(name);
 	}
@@ -105,7 +99,7 @@ const GalleryComp = () => {
 		if (!imgName.endsWith('.jpg')) return setImgNameError("Endast .jpg bilder är tillåtna");
 		if (imgName === '.jpg') return setImgNameError("Kontrollera bildadressen");
 	}
-	function addHamster() {
+	async function addHamster() {
 		const newHamster = {
 			name: inputName,
 			age: inputAge,
@@ -117,19 +111,29 @@ const GalleryComp = () => {
 			games: 0
 		}
 		console.log(newHamster);
+		
+		const postHamsterResponse = await fetch(`/hamsters`, {method: 'POST', headers: {
+			'Content-type': 'application/json'}, body: JSON.stringify(newHamster)});
+		const putData = await postHamsterResponse.text();
+		console.log(putData);
+		setUpdateHamsters(!updateHamsters);
 		setShowAddNew(!showAddNew);
 	}
 
 	function showGalleryOrHamster() {
 		if (!showHamster) {
 			return (
-				<section className="gallery-section">
+				<section className="gallery-comp">
+					<h2>GALLERI</h2>
 					<section className="add-new">					
 						{!showAddNew ? 
-							<button className="basic-btn" onClick={() => setShowAddNew(!showAddNew)}>LÄGG TILL</button>
+							<section className="small-form-section">
+								<p>Lägg till din egna hamster och tävla!</p>
+								<button className="basic-btn" onClick={() => setShowAddNew(!showAddNew)}>LÄGG TILL</button>
+							</section>
 						:
-							<section className="form-section">
-								<h2>Lägg till hamster</h2>
+							<section className="big-form-section">
+								<h2>LÄGG TILL HAMSTER</h2>
 								<div className="add-new-form">
 									<label htmlFor="name">Namn:</label>
 									<input type="text" name="name" value={inputName} onChange={validateName} onBlur={nameToShort}/>
@@ -147,24 +151,29 @@ const GalleryComp = () => {
 									<input type="text" name="imgName" value={inputImgName} onChange={validateImgName} onBlur={imgNameIsImage}/>
 									<div className="error-message">{imgNameError}</div>
 									<div className="button-div">
-										<button className="basic-btn" onClick={addHamster} disabled={isAddDisabled}>LÄGG TILL</button>
+										<button className="basic-btn" onClick={addHamster}>LÄGG TILL</button>
 									</div>
 								</div>
 							</section>
 						}
 					</section>
-					{hamsters.length > 0 ? 
-						hamsters.map(hamster => (
-							<div onClick={() => openHamster(hamster)} key={hamster.firestoreId}>
-								<HamsterCard hamster={hamster} />
-							</div>		
-						))
-					: "Laddar in hamstrar..." }
+					<section className="gallery-section">
+						<h2>HAMSTRAR</h2>
+						<div className="gallery-div">
+							{hamsters.length > 0 ? 
+								hamsters.map(hamster => (
+									<div onClick={() => openHamster(hamster)} key={hamster.firestoreId}>
+										<HamsterCard hamster={hamster} />
+									</div>		
+								))
+							: "Laddar in hamstrar..." }
+						</div>
+					</section>	
 				</section> 
 			)
 		} else {
 			return (
-				<section className="open-hamster-section">
+			<section className="open-hamster-section">
 				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster}/>
 			</section>	
 			)
@@ -172,14 +181,11 @@ const GalleryComp = () => {
 	}
 	
 	const galleryOrHamster = showGalleryOrHamster();
-	
-	if (isValidated.name === true) {
-		setIsAddDisabled(false);
-	}
+
 	return(
-		<section className="gallery-comp">
-			{galleryOrHamster}
-		</section>
+	
+			galleryOrHamster
+
 	);
 }
 
