@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Hamster } from '../../types/hamster-interface'
 import HamsterCard from '../gallery/HamsterCard'
 import './statistics-comp.css'
@@ -23,6 +23,23 @@ const StatisticsComp = () => {
 
 	const [topHamsterArray, setTopHamsterArray] = useState<Hamster[]>(tempArray);
 	const [bottomHamsterArray, setBottomHamsterArray] = useState<Hamster[]>(tempArray);
+
+	useEffect(() => {
+		async function getWinners() {
+			const getWinnersResponse = await fetch(`/winners`, {method: 'GET'});
+			const getWinnersData = await getWinnersResponse.json();
+			console.log(getWinnersData);
+			setTopHamsterArray(getWinnersData);
+		}
+		async function getLosers() {
+			const getLosersResponse = await fetch(`/losers`, {method: 'GET'});
+			const getLosersData = await getLosersResponse.json();
+			console.log(getLosersData);
+			setBottomHamsterArray(getLosersData);
+		}
+		getWinners();
+		getLosers();
+	}, []);
 
 	function listHamsters(hamster:Hamster) {
 		return (
@@ -50,9 +67,14 @@ const StatisticsComp = () => {
 			</ol>
 		)
 	}
-	
+
 	const topHamsters = getHamsters(topHamsterArray);
 	const bottomHamsters = getHamsters(bottomHamsterArray);
+
+	console.log(topHamsters);
+	console.log(bottomHamsters);
+	
+	
 	
 	return( 
 		<section className="statistics-comp">

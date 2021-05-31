@@ -25,6 +25,11 @@ const GalleryComp = () => {
 	const [lovesError, setLovesError] = useState("");
 	const [imgNameError, setImgNameError] = useState("");
 
+	let isValidated = {
+		name: false,
+	};
+	const [isAddDisabled, setIsAddDisabled] = useState(true);
+
 	function openHamster(hamster:Hamster) {
 		setShowHamster(true);
 		setClickedHamster(hamster);
@@ -37,7 +42,11 @@ const GalleryComp = () => {
 	function validateName(event:any) {
 		const name = event.target.value;
 		let validated = validateText(name);
-		if (!validated) return setNameError("Namn får vara max 32 tecken");
+		if (!validated) {
+			isValidated.name = false;
+			return setNameError("Namn får vara max 32 tecken");
+		}
+		isValidated.name = true;
 		setNameError("");
 		setInputName(name);
 	}
@@ -138,7 +147,7 @@ const GalleryComp = () => {
 									<input type="text" name="imgName" value={inputImgName} onChange={validateImgName} onBlur={imgNameIsImage}/>
 									<div className="error-message">{imgNameError}</div>
 									<div className="button-div">
-										<button className="basic-btn" onClick={addHamster}>LÄGG TILL</button>
+										<button className="basic-btn" onClick={addHamster} disabled={isAddDisabled}>LÄGG TILL</button>
 									</div>
 								</div>
 							</section>
@@ -163,7 +172,10 @@ const GalleryComp = () => {
 	}
 	
 	const galleryOrHamster = showGalleryOrHamster();
-		
+	
+	if (isValidated.name === true) {
+		setIsAddDisabled(false);
+	}
 	return(
 		<section className="gallery-comp">
 			{galleryOrHamster}
