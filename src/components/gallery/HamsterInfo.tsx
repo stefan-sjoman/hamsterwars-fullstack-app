@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Hamster } from '../../types/hamster-interface';
+import { runGetHamsters } from '../../atoms/atoms';
 import './hamster-info.css';
+import { useRecoilState } from 'recoil';
 
 interface Props {
 	buttonText: string
@@ -10,6 +12,7 @@ interface Props {
 
 const HamsterInfo = ({buttonText, hamster, buttonFunction}:Props) => {
 
+	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
 	const [infoFooter, setInfoFooter] = useState((
 		<div className="info-footer">
 			<button className="basic-btn" onClick={buttonFunction}>{buttonText}</button>
@@ -17,7 +20,6 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction}:Props) => {
 		</div>
 	));
 
-	
 	function askDelete() {
 		setInfoFooter(
 			<div className="info-footer">
@@ -27,8 +29,10 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction}:Props) => {
 			</div>
 		)
 	}
-	function deleteHamster() {
-		alert("Hamster är raderad.")
+	async function deleteHamster() {
+		if (!hamster) return;
+		await fetch(`/hamsters/${hamster.firestoreId}`, {method: 'DELETE'});
+		setUpdateHamsters(!updateHamsters);
 		buttonFunction();
 	}
 	function dontDelete() {
