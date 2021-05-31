@@ -8,15 +8,20 @@ interface Props {
 	buttonText: string
 	hamster: Hamster | null
 	buttonFunction: () => void
+	showDelete: boolean
 }
 
-const HamsterInfo = ({buttonText, hamster, buttonFunction}:Props) => {
+const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) => {
 
 	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
 	const [infoFooter, setInfoFooter] = useState((
 		<div className="info-footer">
 			<button className="basic-btn" onClick={buttonFunction}>{buttonText}</button>
-			<button className="delete-btn" onClick={askDelete}>Radera hamster</button>
+			{showDelete ? 
+					<button className="delete-btn" onClick={askDelete}>Radera hamster?</button>
+				:
+				null
+				}	
 		</div>
 	));
 
@@ -39,7 +44,11 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction}:Props) => {
 		setInfoFooter(
 			<div className="info-footer">
 				<button className="basic-btn" onClick={buttonFunction}>{buttonText}</button>
-				<button className="delete-btn" onClick={askDelete}>Radera hamster?</button>
+				{showDelete ? 
+					<button className="delete-btn" onClick={askDelete}>Radera hamster?</button>
+				:
+				null
+				}	
 			</div>)
 	}
 

@@ -125,7 +125,7 @@ const GalleryComp = () => {
 			return (
 				<section className="gallery-comp">
 					<h2>GALLERI</h2>
-					<section className="add-new">					
+					<section className="add-new-section">					
 						{!showAddNew ? 
 							<section className="small-form-section">
 								<p>Lägg till din egna hamster och tävla!</p>
@@ -133,7 +133,7 @@ const GalleryComp = () => {
 							</section>
 						:
 							<section className="big-form-section">
-								<h2>LÄGG TILL HAMSTER</h2>
+								<h3>LÄGG TILL HAMSTER</h3>
 								<div className="add-new-form">
 									<label htmlFor="name">Namn:</label>
 									<input type="text" name="name" value={inputName} onChange={validateName} onBlur={nameToShort}/>
@@ -174,7 +174,7 @@ const GalleryComp = () => {
 		} else {
 			return (
 			<section className="open-hamster-section">
-				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster}/>
+				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster} showDelete={true}/>
 			</section>	
 			)
 		}
@@ -183,9 +183,7 @@ const GalleryComp = () => {
 	const galleryOrHamster = showGalleryOrHamster();
 
 	return(
-	
 			galleryOrHamster
-
 	);
 }
 

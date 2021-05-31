@@ -82,9 +82,9 @@ const BattleComp2 = () => {
 			if (randomHamster1 && randomHamster2) {
 				return (
 					<section className="battle-section">
-						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} />
+						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} showDelete={false} />
 						<div className="battle-comp-vs">VS</div>
-						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)}/>
+						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)} showDelete={false}/>
 					</section>
 				)
 			} else {
