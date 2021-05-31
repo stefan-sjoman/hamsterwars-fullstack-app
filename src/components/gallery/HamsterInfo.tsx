@@ -21,9 +21,20 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 					<button className="delete-btn" onClick={askDelete}>Radera hamster?</button>
 				:
 				null
-				}	
+			}	
 		</div>
 	));
+
+	/* Hämta matchWinner med hamsterns ID.*/
+	// får ner matchobject i en array.
+	// för varje matchobject, spara loserId.
+	// hämta alla besegrade hamstrar till en array.
+	const [matchesWon, setMatchesWon] = useState<any[]>([null]);
+	const [losersId, setLosersId] = useState<any[]>([null]);
+	const [defeatedHamsters, setDefeatedHamsters] = useState<string[]>([
+		"Hamster1",
+		"Hamster2"
+	]);
 
 	function askDelete() {
 		setInfoFooter(
@@ -52,6 +63,12 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			</div>)
 	}
 
+	const defeatedHamsterList = 
+		defeatedHamsters.map(defeatedHamster =>
+			<dd>{defeatedHamster}</dd>	
+		);
+	const defeatedDt = (<dt>Besegrat:</dt>)
+	
 	return (
 		hamster ? 
 		<section className="hamster-info">
@@ -66,13 +83,15 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 				<dd>{hamster.loves}</dd>
 				<dt>Matcher:</dt>
 				<dd>{hamster.games + " st"}</dd>
+				{defeatedHamsters.length > 0 ? 
+					defeatedDt : null }
+				{defeatedHamsters.length > 0 ? 
+					defeatedHamsterList : null }
 			</dl>
 			{infoFooter}
 		</section>
-		: <section>
-
-		</section>
-	);
+		: null
+	)
 }
 
 export default HamsterInfo;
