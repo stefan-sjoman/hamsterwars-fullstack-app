@@ -29,12 +29,11 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 	// får ner matchobject i en array.
 	// för varje matchobject, spara loserId.
 	// hämta alla besegrade hamstrar till en array.
-	const [matchesWon, setMatchesWon] = useState<any[]>([null]);
-	const [losersId, setLosersId] = useState<any[]>([null]);
 	const [defeatedHamsters, setDefeatedHamsters] = useState<any[]>([
 		"Hamster1",
 		"Hamster2"
 	]);
+	const [defeatedHamsterList, setDefeatedHamsterList] = useState<any>(null);
 	
 	function askDelete() {
 		setInfoFooter(
@@ -61,47 +60,6 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			</div>)
 	}
 
-	// useEffect(() => {
-	// 	async function getMatchWinners() {
-	// 		if (!showDelete) return;
-	// 		if (!hamster) return;
-			
-	// 		const getMatchWinnersResponse = await fetch(`/matchwinners/${hamster.firestoreId}`, {method: 'GET'});
-	// 			const data = await getMatchWinnersResponse.json();
-	// 			console.log("getMatchWinners data", data);
-				
-	// 			setMatchesWon(data);
-	// 			getLosersId();
-	// 	}
-
-	// 	function getLosersId() {
-	// 		if (!matchesWon) return;
-
-	// 		let tempLosersId:string[] = [];
-	// 		matchesWon.forEach(match => {
-	// 			tempLosersId.push(match.loserId);
-	// 		})
-
-	// 		console.log("getLosersId tempLosersId", tempLosersId);
-	// 		setLosersId(tempLosersId);
-	// 		getLosersName();
-	// 	}
-
-	// 	function getLosersName() {
-	// 		if (losersId === null) return;
-
-	// 		let tempLosers:any[] = [];
-	// 		losersId.forEach(loserId => {
-	// 			const newLoser = getHamsterWithId(loserId);
-	// 			tempLosers.push(newLoser)
-	// 		})
-	// 		console.log("getLosersName tempLosersId", tempLosers);
-	// 		setDefeatedHamsters(tempLosers);
-	// 	}
-	// 	getMatchWinners();
-	// }, [])
-
-
 	useEffect(() => {
 		async function getMatchWinners() {
 			if (!showDelete) return;
@@ -116,6 +74,7 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			if (!data) return;
 			const matches:any[] = data;
 
+			console.log("matches", matches)
 			let tempLosersId:any[] = [];
 
 			matches.forEach(match => {
@@ -130,18 +89,18 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			if (tempLosersId === null) return;
 
 			let tempLosers:any[] = [];
-			tempLosersId.forEach(loserId => {
-				const newLoser = getHamsterWithId(loserId); //Varför funkar inte await
-				tempLosers.push(newLoser);
-			})
-			console.log("getLosersName tempLosersId", tempLosers);
-			setDefeatedHamsters(tempLosers);
+	
+			const newLoser = await getHamsterWithId(tempLosersId[0]);
+			console.log("newLoser" , newLoser);
+			tempLosers.push(newLoser);
+			
+			console.log("getLosersName tempLosersId", tempLosers[0]);
+
+			let list = <dd>{tempLosers[0].name}</dd>
+			setDefeatedHamsterList(list)
 		}
 		getMatchWinners();
 	}, [])
-
-
-
 
 	async function getHamsterWithId(firestoreId:string) {
 		const getHamsterWithIdResponse = await fetch(`/hamsters/${firestoreId}`, {method: 'GET'});
@@ -149,14 +108,8 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 		console.log(getHamsterWithIdData);
 		return getHamsterWithIdData;
 	}
-
-	function buildDefeatedList() {
-		return defeatedHamsters.length > 0 ? 
-		defeatedHamsters.forEach(defeatedHamster =>
-			<dd>{defeatedHamster.name}</dd>) : null;
-	}
-	const defeatedHamsterList = buildDefeatedList();
-	const defeatedDt = defeatedHamsters.length > 0 ? <dt>Besegrat:</dt> : null ;
+	
+	const defeatedDt = <dt>Besegrat:</dt>
 	
 	return (
 		hamster ? 
