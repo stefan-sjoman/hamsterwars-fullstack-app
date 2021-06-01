@@ -69,7 +69,7 @@ const GalleryComp = () => {
 		const imgName = event.target.value;
 		let validated = validateText(imgName);
 		if (!validated) return setImgNameError("Bildadress får vara max 32 tecken");
-		if (imgName.includes("http")) return setImgNameError("Bildadress måste vara lokal adress");
+		if (imgName.includes("http:")) return setImgNameError("Bildadress måste vara lokal adress");
 		setImgNameError("");		
 		setInputImgName(imgName);
 	}
@@ -123,7 +123,7 @@ const GalleryComp = () => {
 	function showGalleryOrHamster() {
 		if (!showHamster) {
 			return (
-				<section className="gallery-comp">
+				<section className="basic-main">
 					<h2>GALLERI</h2>
 					<section className="add-new-section">					
 						{!showAddNew ? 
@@ -157,7 +157,7 @@ const GalleryComp = () => {
 							</section>
 						}
 					</section>
-					<section className="gallery-section">
+					<section className="basic-main">
 						<h2>HAMSTRAR</h2>
 						<div className="gallery-div">
 							{hamsters.length > 0 ? 
@@ -173,8 +173,10 @@ const GalleryComp = () => {
 			)
 		} else {
 			return (
-			<section className="open-hamster-section basic-main">
-				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster} showDelete={true}/>
+			<section className="basic-main">
+				<section className="hamster-info-wrapper">
+					<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster} showDelete={true}/>
+				</section>
 			</section>	
 			)
 		}
@@ -183,7 +185,7 @@ const GalleryComp = () => {
 	const galleryOrHamster = showGalleryOrHamster();
 
 	return(
-			galleryOrHamster
+		galleryOrHamster
 	);
 }
 

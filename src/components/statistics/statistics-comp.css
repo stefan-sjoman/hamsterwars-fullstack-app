@@ -5,19 +5,10 @@
 	text-align: center;
 }
 .statistics-comp > div {
-	background-color: var(--color2);
-	border: 0.3em solid var(--color3);
-	border-radius: 2em;
 	padding: 1em 4em;
 	margin: 4em 1em;
-}
-.statistics-comp ol {
-	width: calc(120px + 8em);
-}
+}	
 .statistics-comp ol > li {
-	background-color: white;
-	border: 0.3em solid var(--color3);
-	border-radius: 2em;
 	list-style-position: inside;
 	margin-top: 3em;
 }
