@@ -1,8 +1,8 @@
 .hamster-info {
-	width: 240px;
 	display: flex;
 	flex-direction: column;
-	background-color: var(--color2);
+	align-items: center;
+	background-color: white;
 	border: 0.3em solid var(--color3);
 	border-radius: 3em;
 	margin: 1em auto;
@@ -12,6 +12,7 @@
 	width: 240px;
 	height: 240px;
 	object-fit: cover;
+	border: 0.3em solid var(--color3);
 	border-radius: 2em;
 }
 .info-footer {

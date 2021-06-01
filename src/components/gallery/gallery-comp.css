@@ -20,6 +20,11 @@
 	gap: 1em;
 	padding: 1em 4em 
 }
+.open-hamster-section {
+	background-color: var(--color2);
+	border: 0.3em solid var(--color3);
+	border-radius: 2em;
+}
 .add-new-section {
 	display: flex;
 	justify-content: center;

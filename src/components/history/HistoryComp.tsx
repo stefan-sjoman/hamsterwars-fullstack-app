@@ -17,7 +17,7 @@ const HistoryComp = () => {
 	}
 
 	return(
-		<section className="history-comp">
+		<section className="history-comp basic-main">
 			<h2>SENASTE MATCHER</h2>
 			<section className="games-section">
 				<div className="one-game">

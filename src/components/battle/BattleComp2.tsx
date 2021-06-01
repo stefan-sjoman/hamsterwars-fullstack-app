@@ -82,9 +82,11 @@ const BattleComp2 = () => {
 			if (randomHamster1 && randomHamster2) {
 				return (
 					<section className="battle-section">
-						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} showDelete={false} />
-						<div className="battle-comp-vs">VS</div>
-						<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)} showDelete={false}/>
+						<div className="one-game">
+							<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} showDelete={false} />
+							<div className="vs-div">VS</div>
+							<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)} showDelete={false}/>
+						</div>
 					</section>
 				)
 			} else {
@@ -98,9 +100,11 @@ const BattleComp2 = () => {
 			if (updatedWinner !== null && updatedLoser !== null) {
 				return (
 					<section className="after-battle">
+						<h2>RESULTAT</h2>
 						<section className="games-section">
 							<div className="one-game">
 								<div className="game-winner">
+									<h3 className="games-header">VINNARE</h3>
 									<HamsterCard hamster={updatedWinner}/>
 									<ul>
 										<li>Vinster: {updatedWinner.wins}</li>
@@ -132,7 +136,7 @@ const BattleComp2 = () => {
 	const content = voteOrResult();
 
 	return (
-		<section className="battle-comp">
+		<section className="battle-comp basic-main">
 			{ content }		
 		</section>
 	);

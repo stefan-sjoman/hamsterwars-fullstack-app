@@ -173,7 +173,7 @@ const GalleryComp = () => {
 			)
 		} else {
 			return (
-			<section className="open-hamster-section">
+			<section className="open-hamster-section basic-main">
 				<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster} showDelete={true}/>
 			</section>	
 			)
