@@ -12,6 +12,7 @@ const BattleComp2 = () => {
 	const [updatedWinner, setUpdatedWinner] = useState<any>(null)
 	const [updatedLoser, setUpdatedLoser] = useState<any>(null)
 	const [hasVoted, setHasVoted] = useState(false);
+	const [runUseEffect, setRunUseEffect] = useState(true);
 
 	useEffect(() => {
 		async function getRandomHamster(setHamster:(data:any) => void) {
@@ -22,7 +23,7 @@ const BattleComp2 = () => {
 		}
 		getRandomHamster(setRandomHamster1);
 		getRandomHamster(setRandomHamster2);
-	}, [])
+	}, [runUseEffect])
 
 	async function getHamsterWithId(firestoreId:string) {
 		const getHamsterWithIdResponse = await fetch(`/hamsters/${firestoreId}`, {method: 'GET'});
@@ -77,6 +78,7 @@ const BattleComp2 = () => {
 		console.log(postMatchData);
 	}
 
+
 	function voteOrResult () {
 		if (!hasVoted) {
 			if (randomHamster1 && randomHamster2) {
@@ -106,21 +108,24 @@ const BattleComp2 = () => {
 								<div className="game-winner">
 									<h3 className="games-header">VINNARE</h3>
 									<HamsterCard hamster={updatedWinner}/>
-									<ul>
-										<li>Vinster: {updatedWinner.wins}</li>
-										<li>Förluster: {updatedWinner.defeats}</li>
-										<li>Matcher: {updatedWinner.games}</li>
-									</ul>
+									<dl>
+										<dt>Vinster:</dt> <dd>{updatedWinner.wins}</dd>
+										<dt>Förluster:</dt> <dd>{updatedWinner.defeats}</dd>
+										<dt>Matcher:</dt> <dd>{updatedWinner.games}</dd>
+									</dl>
 								</div>
 								<div className="vs-div">VS</div>
 								<div className="game-loser">
 									<h3 className="games-header">FÖRLORARE</h3>
 									<HamsterCard hamster={updatedLoser}/>
-									<ul>
-										<li>Vinster: {updatedLoser.wins}</li>
-										<li>Förluster: {updatedLoser.defeats}</li>
-										<li>Matcher: {updatedLoser.games}</li>
-									</ul>
+									<dl>
+										<dt>Vinster:</dt> <dd>{updatedLoser.wins}</dd>
+										<dt>Förluster:</dt> <dd>{updatedLoser.defeats}</dd>
+										<dt>Matcher:</dt> <dd>{updatedLoser.games}</dd>
+									</dl>
+								</div>
+								<div className="to-battle-btn">
+									<button className="basic-btn" onClick={() => setRunUseEffect(!runUseEffect)}>TÄVLA IGEN</button>
 								</div>
 							</div>
 						</section>

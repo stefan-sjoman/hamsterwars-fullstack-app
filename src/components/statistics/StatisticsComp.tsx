@@ -5,24 +5,8 @@ import './statistics-comp.css'
 
 const StatisticsComp = () => {
 
-	/*********************************************** */
-	let tempHamster = {
-		"name": "Alma",
-		"favFood": "ananas",
-		"wins": 5,
-		"age": 3,
-		"loves": "bli klappad",
-		"defeats": 17,
-		"imgName": "hamster-35.jpg",
-		"games": 25,
-		"firestoreId": "0S4wKVHGdkWKIpygFz9Y"
-	}
-	let tempArray:Hamster[] = [tempHamster,tempHamster,tempHamster,tempHamster,tempHamster];
-
-	/**************************************************/
-
-	const [topHamsterArray, setTopHamsterArray] = useState<Hamster[]>(tempArray);
-	const [bottomHamsterArray, setBottomHamsterArray] = useState<Hamster[]>(tempArray);
+	const [topHamsterArray, setTopHamsterArray] = useState<Hamster[]>();
+	const [bottomHamsterArray, setBottomHamsterArray] = useState<Hamster[]>();
 
 	useEffect(() => {
 		async function getWinners() {
@@ -68,13 +52,15 @@ const StatisticsComp = () => {
 		)
 	}
 
-	const topHamsters = getHamsters(topHamsterArray);
-	const bottomHamsters = getHamsters(bottomHamsterArray);
-
-	console.log(topHamsters);
-	console.log(bottomHamsters);
+	if (topHamsterArray && bottomHamsterArray) {
+		const topHamsters = getHamsters(topHamsterArray);
+		const bottomHamsters = getHamsters(bottomHamsterArray);
 	
-	return( 
+		console.log(topHamsters);
+		console.log(bottomHamsters);
+	
+	
+	return ( 
 		<section className="statistics-comp">
 			<div>
 				<h2>TOPP 5</h2>
@@ -86,6 +72,12 @@ const StatisticsComp = () => {
 			</div>
 		</section>
 	);
+	} else {
+		return (
+			<section className="statistics-comp">
+			</section>
+		)
+	}
 }
 
 export default StatisticsComp;

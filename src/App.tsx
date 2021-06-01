@@ -10,7 +10,6 @@ import HistoryComp from './components/history/HistoryComp';
 import {allHamsters, runGetHamsters} from './atoms/atoms';
 import ErrorComp from './components/error/ErrorComp';
 
-
 function App() {
 
 	const [hamsters, setHamsters] = useRecoilState(allHamsters); //useSetRecoilState
@@ -21,7 +20,11 @@ function App() {
 		if (!runUseEffect) return;
 		async function getHamsters() {
 			const response = await fetch('/hamsters', {method: 'GET'});
-			//if (response.status !== 200) setContactDb(false);
+			if (response.status !== 200) {
+				setContactDb(false);
+			} else {
+				setContactDb(true);
+			}
 			const data = await response.json();
 			setHamsters(data);
 		}
@@ -36,12 +39,15 @@ function App() {
 			
 			<header>
 				<h1><Link to="/">HAMSTERWARS</Link></h1>
+				{contactDb ? 
 				<nav>
 					<NavLink to="/battle" activeClassName="active-route">TÄVLA</NavLink>
 					<NavLink to="/gallery" activeClassName="active-route">GALLERI</NavLink>
 					<NavLink to="/statistics" activeClassName="active-route">STATISTIK</NavLink>
 					<NavLink to="/history" activeClassName="active-route">HISTORIK</NavLink>
 				</nav>
+				:
+				null }
 			</header>
 			<main>
 			{contactDb ? 
@@ -53,7 +59,7 @@ function App() {
 					<Route path="/"><StartComp /></Route>
 				</Switch>
 			:
-				<ErrorComp />	
+				<ErrorComp runUseEffect={runUseEffect} setRunUseEffect={setRunUseEffect}/>	
 			}
 			</main>
 		</div>
