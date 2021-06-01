@@ -63,12 +63,13 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			</div>)
 	}
 
-	const defeatedHamsterList = 
+	const defeatedDt = defeatedHamsters.length > 0 ? 
+		<dt>Besegrat:</dt> : null ;
+	const defeatedHamsterList = defeatedHamsters.length > 0 ? 
 		defeatedHamsters.map(defeatedHamster =>
-			<dd>{defeatedHamster}</dd>	
-		);
-	const defeatedDt = (<dt>Besegrat:</dt>)
-	
+			<dd>{defeatedHamster}</dd>) : null;
+
+
 	return (
 		hamster ? 
 		<section className="hamster-info">
@@ -83,10 +84,8 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 				<dd>{hamster.loves}</dd>
 				<dt>Matcher:</dt>
 				<dd>{hamster.games + " st"}</dd>
-				{defeatedHamsters.length > 0 ? 
-					defeatedDt : null }
-				{defeatedHamsters.length > 0 ? 
-					defeatedHamsterList : null }
+				{defeatedDt}
+				{defeatedHamsterList}
 			</dl>
 			{infoFooter}
 		</section>

@@ -97,9 +97,11 @@ dl {
 	font-size: 1.2em;
 }
 dt {
+	grid-column: 1;
 	text-align: left;
 }
 dd {
+	grid-column: 2;
 	text-align: right;
 }
 

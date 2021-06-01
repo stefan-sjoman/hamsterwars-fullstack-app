@@ -6,11 +6,6 @@
 	margin: 4em 1em;
 	text-align: center;
 }
-.gallery-comp .add-new {
-	grid-column: 1/6;
-	display: flex;
-	justify-content: center;
-}
 .gallery-section {
 	text-align: center;
 	margin: 1em;
@@ -20,18 +15,21 @@
 	border: 0.3em solid var(--color3);
 	border-radius: 2em;
 	display: grid;
-	grid-template-columns: repeat(5, auto);
+	grid-template-columns: repeat(5, 1fr);
 	justify-content: center;
 	gap: 1em;
 	padding: 1em 4em 
 }
 .add-new-section {
+	display: flex;
+	justify-content: center;
 	background-color: white;
 	border: 0.3em solid var(--color3);
 	border-radius: 2em;
-	margin-bottom: 4em;
+	margin: 0em 1em 4em 1em;
 }
 .small-form-section {
+	grid-column: 3;
 	background-color: var(--color2);
 	border: 0.3em solid var(--color3);
 	border-radius: 2em;
