@@ -92,6 +92,9 @@ nav a {
 	text-decoration: underline;
 	cursor: pointer;
 }
+.delete-btn:hover {
+	color: red;
+}
 
 .one-game {
 	background-color: var(--color2);

@@ -21,7 +21,6 @@ const HistoryComp = () => {
 		const latestMatches = matchesData.map(match => 
 			(<GameComp match={match} key={match.firestoreId}/>)
 		)
-
 		return (
 			<section className="history-comp basic-main">
 				<h2>SENASTE MATCHER</h2>
@@ -30,7 +29,8 @@ const HistoryComp = () => {
 				</section>
 			</section>
 		);
-	} else return <div>Loading...</div>
+	} 
+	return <div>Loading...</div>
 }
 
 export default HistoryComp;
