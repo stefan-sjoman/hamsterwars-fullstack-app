@@ -99,6 +99,14 @@ const GalleryComp = () => {
 		if (!imgName.endsWith('.jpg')) return setImgNameError("Endast .jpg bilder är tillåtna");
 		if (imgName === '.jpg') return setImgNameError("Kontrollera bildadressen");
 	}
+	function isAllValidated() {
+		if (nameError === "" && ageError === "" && favFoodError === "" && lovesError === "" && 
+			imgNameError === "" ) {
+			return true;
+		}
+		return false;
+	}
+
 	async function addHamster() {
 		const newHamster = {
 			name: inputName,
@@ -110,7 +118,6 @@ const GalleryComp = () => {
 			defeats: 0,
 			games: 0
 		}
-		console.log(newHamster);
 		
 		const postHamsterResponse = await fetch(`/hamsters`, {method: 'POST', headers: {
 			'Content-type': 'application/json'}, body: JSON.stringify(newHamster)});
@@ -151,7 +158,10 @@ const GalleryComp = () => {
 									<input type="text" name="imgName" value={inputImgName} onChange={validateImgName} onBlur={imgNameIsImage}/>
 									<div className="error-message">{imgNameError}</div>
 									<div className="button-div">
-										<button className="basic-btn" onClick={addHamster}>LÄGG TILL</button>
+									{isAllValidated() ? 
+										<button className="basic-btn" onClick={addHamster}>LÄGG TILL</button> :
+										<button className="disabled-btn">LÄGG TILL</button>
+									}
 									</div>
 								</div>
 							</section>

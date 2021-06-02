@@ -95,6 +95,16 @@ nav a {
 .delete-btn:hover {
 	color: red;
 }
+.disabled-btn {
+	background-color: rgb(180, 180, 180);
+	color: white;
+	border: 4px solid white;
+	border-radius: 1em;
+	min-width: 8em;
+	min-height: 3em;
+	font-family: Margarine;
+	font-size: 1em;
+}
 
 .one-game {
 	background-color: var(--color2);

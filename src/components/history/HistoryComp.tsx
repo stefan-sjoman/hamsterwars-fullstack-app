@@ -5,7 +5,8 @@ import './history-comp.css';
 
 const HistoryComp = () => {
 
-	const [matchesData, setMatchesData] = useState<any[]>([])
+	const [matchesData, setMatchesData] = useState<any[]>([]);
+	const [runUseEffect, setRunUseEffect] = useState(true);
 
 	useEffect(() => {
 		async function getMatches() {
@@ -15,11 +16,15 @@ const HistoryComp = () => {
 			console.log(data);
 		}
 		getMatches();
-	}, [])
+	}, [runUseEffect])
+
+	function refreshMatches() {
+		setRunUseEffect(!runUseEffect);
+	}
 
 	if (matchesData) {
-		const latestMatches = matchesData.map(match => 
-			(<GameComp match={match} key={match.firestoreId}/>)
+		const latestMatches = matchesData.map(match =>  
+			(<GameComp key={match.firestoreId} match={match} refreshMatches={refreshMatches} />)
 		)
 		return (
 			<section className="history-comp basic-main">

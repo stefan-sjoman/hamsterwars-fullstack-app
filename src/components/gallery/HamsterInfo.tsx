@@ -58,36 +58,22 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			if (!hamster) return;
 			
 			const getMatchWinnersResponse = await fetch(`/matchwinners/${hamster.firestoreId}`, {method: 'GET'});
-				const data = await getMatchWinnersResponse.json();
-				console.log("getMatchWinners data", data);
-
-////////////////////////////////////////////////////////
+			const data = await getMatchWinnersResponse.json();
 
 			if (!data) return;
 			const matches:any[] = data;
-
-			console.log("matches", matches)
 			let tempLosersId:any[] = [];
-
 			matches.forEach(match => {
 				const loserId = match.loserId;
 				tempLosersId.push(loserId);
 			})
 
-			console.log("getLosersId tempLosersId", tempLosersId);
-
-////////////////////////////////////////////////////
-
 			if (tempLosersId === null) return;
-
 			let tempLosers:any[] = [];
-
 			tempLosersId.forEach(id => {
 				tempLosers.push(hamsters.find( ({ firestoreId }) => firestoreId === id )
 			)});
-
 			let list:any[] = [];
-			
 			tempLosers.forEach(loser => {
 				list.push(<dd key={loser.firestoreId}>{loser.name}</dd>)
 			});
