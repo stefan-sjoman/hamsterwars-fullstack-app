@@ -4,7 +4,7 @@ import GameComp from "./GameComp";
 import './history-comp.css';
 
 const HistoryComp = () => {
-	
+	// hämta state allhamsters
 	const [matchesData, setMatchesData] = useState<any[]>([])
 
 	useEffect(() => {

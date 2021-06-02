@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Hamster } from '../../types/hamster-interface';
-import { runGetHamsters } from '../../atoms/atoms';
+import { runGetHamsters, allHamsters } from '../../atoms/atoms';
 import './hamster-info.css';
 import { useRecoilState } from 'recoil';
 
@@ -13,6 +13,7 @@ interface Props {
 
 const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) => {
 
+	const [hamsters] = useRecoilState(allHamsters);
 	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
 	const [infoFooter, setInfoFooter] = useState((
 		<div className="info-footer">
@@ -89,25 +90,21 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			if (tempLosersId === null) return;
 
 			let tempLosers:any[] = [];
-	
-			const newLoser = await getHamsterWithId(tempLosersId[0]);
-			console.log("newLoser" , newLoser);
-			tempLosers.push(newLoser);
-			
-			console.log("getLosersName tempLosersId", tempLosers[0]);
 
-			let list = <dd>{tempLosers[0].name}</dd>
+			tempLosersId.forEach(id => {
+				tempLosers.push(hamsters.find( ({ firestoreId }) => firestoreId === id )
+			)});
+
+			let list:any[] = [];
+			
+			tempLosers.forEach(loser => {
+				list.push(<dd>{loser.name}</dd>)
+			});
+			
 			setDefeatedHamsterList(list)
 		}
 		getMatchWinners();
 	}, [])
-
-	async function getHamsterWithId(firestoreId:string) {
-		const getHamsterWithIdResponse = await fetch(`/hamsters/${firestoreId}`, {method: 'GET'});
-		const getHamsterWithIdData = await getHamsterWithIdResponse.json();
-		console.log(getHamsterWithIdData);
-		return getHamsterWithIdData;
-	}
 	
 	const defeatedDt = <dt>Besegrat:</dt>
 	

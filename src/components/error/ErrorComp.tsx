@@ -10,7 +10,7 @@ const ErrorComp = ({runUseEffect, setRunUseEffect}:Props) => {
 		<section className="error-comp">
 			<p className="db-error">Tyvärr kunde in hamstarna hämtas från databasen. Försök igen senare eller testa ladda om sidan direkt.
 			</p>
-			<button className="basic-btn" onClick={() => setRunUseEffect(!runUseEffect)}> {/* Kör om hämtningen... INTE RELOAD */}
+			<button className="basic-btn" onClick={() => setRunUseEffect(!runUseEffect)}>
 				LADDA OM
 			</button>
 		</section>
