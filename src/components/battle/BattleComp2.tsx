@@ -52,8 +52,6 @@ const BattleComp2 = () => {
 				tempWinner.games = winner.games + 1;
 				tempLoser.defeats = loser.defeats +1;
 				tempLoser.games = loser.games + 1;
-
-				console.log("TEMPWINNER",tempWinner);
 				
 				setUpdatedWinner(tempWinner);
 				setUpdatedLoser(tempLoser);	
@@ -91,9 +89,9 @@ const BattleComp2 = () => {
 				return (
 					<section className="battle-section">
 						<div className="one-game">
-							<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} showDelete={false} />
+							<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster1} buttonFunction={() => voting(randomHamster1, randomHamster2)} showDeleteAndDefeated={false} />
 							<div className="vs-div">VS</div>
-							<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)} showDelete={false}/>
+							<HamsterInfo buttonText={"RÖSTA"} hamster={randomHamster2} buttonFunction={() => voting(randomHamster2, randomHamster1)} showDeleteAndDefeated={false}/>
 						</div>
 					</section>
 				)

@@ -26,6 +26,8 @@ const GalleryComp = () => {
 	const [lovesError, setLovesError] = useState("");
 	const [imgNameError, setImgNameError] = useState("");
 
+	const [isAllValidated, setIsAllValidated] = useState(false);
+
 	function openHamster(hamster:Hamster) {
 		setShowHamster(true);
 		setClickedHamster(hamster);
@@ -43,6 +45,7 @@ const GalleryComp = () => {
 		}
 		setNameError("");
 		setInputName(name);
+		validateAll();
 	}
 	function validateAge(event:any) {
 		const age = event.target.value;
@@ -50,6 +53,7 @@ const GalleryComp = () => {
 		if (age > 9) return setAgeError("Åldern får inte vara över 9 år");
 		setAgeError("");
 		setInputAge(age);
+		validateAll();
 	}
 	function validateFavFood(event:any) {
 		const favFood = event.target.value;
@@ -57,6 +61,7 @@ const GalleryComp = () => {
 		if (!validated) return setFavFoodError("Favoritmat får vara max 32 tecken");
 		setFavFoodError("");
 		setInputFavFood(favFood);
+		validateAll();
 	}
 	function validateLoves(event:any) {
 		const loves = event.target.value;
@@ -64,6 +69,7 @@ const GalleryComp = () => {
 		if (!validated) return setLovesError("Älskar får vara max 32 tecken");
 		setLovesError("");
 		setInputLoves(loves);
+		validateAll();
 	}
 	function validateImgName(event:any) {
 		const imgName = event.target.value;
@@ -72,39 +78,49 @@ const GalleryComp = () => {
 		if (imgName.includes("http:")) return setImgNameError("Bildadress måste vara lokal adress");
 		setImgNameError("");		
 		setInputImgName(imgName);
+		validateAll();
 	}
 	function validateText(text:string) {
+		validateAll();
 		if (text.length > 32) return false;
 		return true;
 	}
 	function nameToShort(event:any) {
 		const name = event.target.value;
 		if (name.length < 3) return setNameError("Namn måste vara minst 3 bokstäver");
+		validateAll();
 	}
 	function ageIsEmpty(event:any) {
 		const age = event.target.value;
 		if (age.length === 0) return setAgeError("Ålder måste vara ifyllt");
+		validateAll();
 	}
 	function favFoodToShort(event:any) {
 		const favFood = event.target.value;
 		if (favFood.length < 3) return setFavFoodError("Favoritmat måste vara minst 3 bokstäver");
+		validateAll();
 	}
 	function lovesToShort(event:any) {
 		const loves = event.target.value;
 		if (loves.length < 3) return setLovesError("Älskar måste vara minst 3 bokstäver");
+		validateAll();
 	}
 	function imgNameIsImage(event:any) {
 		const imgName = event.target.value 
 		if (imgName.length === 0) return setImgNameError("Bildadress måste finnas");
 		if (!imgName.endsWith('.jpg')) return setImgNameError("Endast .jpg bilder är tillåtna");
 		if (imgName === '.jpg') return setImgNameError("Kontrollera bildadressen");
+		validateAll();
 	}
-	function isAllValidated() {
-		if (nameError === "" && ageError === "" && favFoodError === "" && lovesError === "" && 
-			imgNameError === "" ) {
-			return true;
+	function validateAll() {
+
+		const possibleErrors = (nameError === "" && ageError === "" && favFoodError === "" && lovesError === "" && 
+		imgNameError === "") && (inputName !== "" && inputAge !== "" && inputFavFood !== "" && inputLoves !== "" && inputImgName !== "")
+
+		if (possibleErrors) {
+			return setIsAllValidated(true);
 		}
-		return false;
+		setIsAllValidated(false);
 	}
 
 	async function addHamster() {
@@ -158,7 +174,7 @@ const GalleryComp = () => {
 									<input type="text" name="imgName" value={inputImgName} onChange={validateImgName} onBlur={imgNameIsImage}/>
 									<div className="error-message">{imgNameError}</div>
 									<div className="button-div">
-									{isAllValidated() ? 
+									{isAllValidated ? 
 										<button className="basic-btn" onClick={addHamster}>LÄGG TILL</button> :
 										<button className="disabled-btn">LÄGG TILL</button>
 									}
@@ -185,7 +201,7 @@ const GalleryComp = () => {
 			return (
 			<section className="basic-main">
 				<section className="hamster-info-wrapper">
-					<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster} showDelete={true}/>
+					<HamsterInfo buttonText={"STÄNG"} hamster={clickedHamster} buttonFunction={closeHamster} showDeleteAndDefeated={true}/>
 				</section>
 			</section>	
 			)

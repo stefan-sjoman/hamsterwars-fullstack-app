@@ -55,23 +55,19 @@ const StatisticsComp = () => {
 	if (topHamsterArray && bottomHamsterArray) {
 		const topHamsters = getHamsters(topHamsterArray);
 		const bottomHamsters = getHamsters(bottomHamsterArray);
-	
-		console.log(topHamsters);
-		console.log(bottomHamsters);
-	
-	
-	return ( 
-		<section className="statistics-comp">
-			<div>
-				<h2>TOPP 5</h2>
-				{ topHamsters }	
-			</div>
-			<div>
-				<h2>SISTA 5</h2>
-				{ bottomHamsters }	
-			</div>
-		</section>
-	);
+
+		return ( 
+			<section className="statistics-comp">
+				<div>
+					<h2>TOPP 5</h2>
+					{ topHamsters }	
+				</div>
+				<div>
+					<h2>SISTA 5</h2>
+					{ bottomHamsters }	
+				</div>
+			</section>
+		);
 	} else {
 		return (
 			<section className="statistics-comp">

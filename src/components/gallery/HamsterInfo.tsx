@@ -8,17 +8,17 @@ interface Props {
 	buttonText: string
 	hamster: Hamster | null
 	buttonFunction: () => void
-	showDelete: boolean
+	showDeleteAndDefeated: boolean
 }
 
-const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) => {
+const HamsterInfo = ({buttonText, hamster, buttonFunction, showDeleteAndDefeated}:Props) => {
 
 	const [hamsters] = useRecoilState(allHamsters);
 	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
 	const [infoFooter, setInfoFooter] = useState((
 		<div className="info-footer">
 			<button className="basic-btn" onClick={buttonFunction}>{buttonText}</button>
-			{showDelete ? 
+			{showDeleteAndDefeated ? 
 					<button className="delete-btn" onClick={askDelete}>Radera hamster?</button>
 				:
 				null
@@ -46,7 +46,7 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 		setInfoFooter(
 			<div className="info-footer">
 				<button className="basic-btn" onClick={buttonFunction}>{buttonText}</button>
-				{showDelete ? 
+				{showDeleteAndDefeated ? 
 					<button className="delete-btn" onClick={askDelete}>Radera hamster?</button>
 				: null }	
 			</div>)
@@ -54,7 +54,7 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 
 	useEffect(() => {
 		async function getMatchWinners() {
-			if (!showDelete) return;
+			if (!showDeleteAndDefeated) return;
 			if (!hamster) return;
 			
 			const getMatchWinnersResponse = await fetch(`/matchwinners/${hamster.firestoreId}`, {method: 'GET'});
@@ -81,9 +81,15 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			setDefeatedHamsterList(list)
 		}
 		getMatchWinners();
-	}, [hamsters, hamster, showDelete])
+	}, [hamsters, hamster, showDeleteAndDefeated])
 	
-	const defeatedDt = <dt>Besegrat:</dt>
+	function showDefeated() {
+		if (showDeleteAndDefeated) {
+			return <dt>Besegrat:</dt>
+		} return null
+	}
+
+	const defeatedDt = showDefeated()
 	
 	return (
 		hamster ? 
