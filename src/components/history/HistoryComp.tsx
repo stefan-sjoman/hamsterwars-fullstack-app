@@ -18,13 +18,10 @@ const HistoryComp = () => {
 		getMatches();
 	}, [runUseEffect])
 
-	function refreshMatches() {
-		setRunUseEffect(!runUseEffect);
-	}
 
 	if (matchesData) {
 		const latestMatches = matchesData.map(match =>  
-			(<GameComp key={match.firestoreId} match={match} refreshMatches={refreshMatches} />)
+			(<GameComp key={match.firestoreId} match={match} setMatchesData={setMatchesData} runUseEffect={runUseEffect} setRunUseEffect={setRunUseEffect}/>)
 		)
 		return (
 			<section className="history-comp basic-main">

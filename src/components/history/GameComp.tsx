@@ -5,10 +5,12 @@ import HamsterCard from "../gallery/HamsterCard";
 
 interface Props {
 	match:any
-	refreshMatches: any
+	setMatchesData: any
+	runUseEffect: any
+	setRunUseEffect: any
 }
 
-const GameComp = ({match, refreshMatches}:Props) => {
+const GameComp = ({match, setMatchesData, runUseEffect, setRunUseEffect}:Props) => {
 
 	const [hamsters] = useRecoilState(allHamsters);
 	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
@@ -38,7 +40,8 @@ const GameComp = ({match, refreshMatches}:Props) => {
 		if (!match) return;
 		await fetch(`/matches/${match.firestoreId}`, {method: 'DELETE'});
 		setUpdateHamsters(!updateHamsters);
-		refreshMatches();
+		setMatchesData(null);
+		setRunUseEffect(!runUseEffect);
 	}
 	function dontDelete() {
 		setInfoFooter(
@@ -49,7 +52,7 @@ const GameComp = ({match, refreshMatches}:Props) => {
 	}
 
 	let JSX = <div></div>
-	if (winner) {
+	if (winner && loser) {
 		JSX = (
 		<div className="one-game">
 			<div className="game-winner">
