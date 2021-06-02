@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { allHamsters, runGetHamsters } from "../../atoms/atoms";
 import HamsterCard from "../gallery/HamsterCard";
 
 interface Props {
@@ -7,25 +9,42 @@ interface Props {
 
 const GameComp = ({match}:Props) => {
 
+	const [hamsters] = useRecoilState(allHamsters);
+	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
 	const [winner, setWinner] = useState<any>();
-	//const [loser, setLoser] = useState<any>();
+	const [loser, setLoser] = useState<any>();
+	const [infoFooter, setInfoFooter] = useState((
+		<div className="info-footer">
+			<button className="delete-btn" onClick={askDelete}>Radera match?</button>	
+		</div>
+	));
 
 	useEffect(() => {
-		async function getWinner() {
-			const getWinnerResponse = await fetch(`/hamsters/${match.winnerId}`, {method: 'GET'});
-			const data = await getWinnerResponse.json();
-			setWinner(data);
-			console.log(data);
-		}
-		// async function getLoser() {
-		// 	const getLoserResponse = await fetch(`/hamsters/${match.loserId}`, {method: 'GET'});
-		// 	const data = await getLoserResponse.json();
-		// 	setLoser(data);
-		// 	console.log(data);
-		// }
-		getWinner();
-		// getLoser();
-	}, [])
+		setWinner(hamsters.find( ({ firestoreId }) => firestoreId === match.winnerId ));
+		setLoser(hamsters.find( ({ firestoreId }) => firestoreId === match.loserId ));
+	}, [hamsters, match.winnerId, match.loserId])
+
+	function askDelete() {
+		setInfoFooter(
+			<div className="info-footer">
+				<p>Vill du radera matchen?</p>
+				<button className="basic-btn" onClick={deleteMatch} >RADERA</button>
+				<button className="secondary-btn" onClick={dontDelete}>AVBRYT</button>
+			</div>
+		)
+	}
+	async function deleteMatch() {
+		if (!match) return;
+		await fetch(`/matches/${match.firestoreId}`, {method: 'DELETE'});
+		setUpdateHamsters(!updateHamsters);
+	}
+	function dontDelete() {
+		setInfoFooter(
+			<div className="info-footer">
+					<button className="delete-btn" onClick={askDelete}>Radera match?</button>
+			</div>
+		)
+	}
 
 	let JSX = <div></div>
 	if (winner) {
@@ -34,12 +53,29 @@ const GameComp = ({match}:Props) => {
 			<div className="game-winner">
 				<h3 className="games-header">VINNARE</h3>
 				<HamsterCard hamster={winner}/>
+				<dl>
+					<dt>Vinster:</dt>
+					<dd>{winner.wins + " st"}</dd>
+					<dt>Förluster:</dt>
+					<dd>{winner.defeats + " st"}</dd>
+					<dt>Matcher:</dt>
+					<dd>{winner.games + " st"}</dd>
+				</dl>
 			</div>
 			<div className="vs-div">VS</div>
 			<div className="game-loser">
 				<h3 className="games-header">FÖRLORARE</h3>
-				<HamsterCard hamster={winner}/>
+				<HamsterCard hamster={loser}/>
+				<dl>
+					<dt>Vinster:</dt>
+					<dd>{loser.wins + " st"}</dd>
+					<dt>Förluster:</dt>
+					<dd>{loser.defeats + " st"}</dd>
+					<dt>Matcher:</dt>
+					<dd>{loser.games + " st"}</dd>
+				</dl>
 			</div>
+			{infoFooter}
 		</div>
 		)
 	}

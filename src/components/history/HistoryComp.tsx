@@ -4,7 +4,7 @@ import GameComp from "./GameComp";
 import './history-comp.css';
 
 const HistoryComp = () => {
-	// hämta state allhamsters
+
 	const [matchesData, setMatchesData] = useState<any[]>([])
 
 	useEffect(() => {
@@ -17,14 +17,20 @@ const HistoryComp = () => {
 		getMatches();
 	}, [])
 
-	return(
-		<section className="history-comp basic-main">
-			<h2>SENASTE MATCHER</h2>
-			<section className="games-section">		
-				{matchesData ? <GameComp match={matchesData[0]} /> : null }
+	if (matchesData) {
+		const latestMatches = matchesData.map(match => 
+			(<GameComp match={match} key={match.firestoreId}/>)
+		)
+
+		return (
+			<section className="history-comp basic-main">
+				<h2>SENASTE MATCHER</h2>
+				<section className="games-section">		
+					{latestMatches}
+				</section>
 			</section>
-		</section>
-	);
+		);
+	} else return <div>Loading...</div>
 }
 
 export default HistoryComp;

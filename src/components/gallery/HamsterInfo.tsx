@@ -25,15 +25,6 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			}	
 		</div>
 	));
-
-	/* Hämta matchWinner med hamsterns ID.*/
-	// får ner matchobject i en array.
-	// för varje matchobject, spara loserId.
-	// hämta alla besegrade hamstrar till en array.
-	const [defeatedHamsters, setDefeatedHamsters] = useState<any[]>([
-		"Hamster1",
-		"Hamster2"
-	]);
 	const [defeatedHamsterList, setDefeatedHamsterList] = useState<any>(null);
 	
 	function askDelete() {
@@ -98,13 +89,13 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDelete}:Props) =>
 			let list:any[] = [];
 			
 			tempLosers.forEach(loser => {
-				list.push(<dd>{loser.name}</dd>)
+				list.push(<dd key={loser.firestoreId}>{loser.name}</dd>)
 			});
 			
 			setDefeatedHamsterList(list)
 		}
 		getMatchWinners();
-	}, [])
+	}, [hamsters, hamster, showDelete])
 	
 	const defeatedDt = <dt>Besegrat:</dt>
 	

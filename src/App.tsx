@@ -31,7 +31,7 @@ function App() {
 		getHamsters();
 		setRunUseEffect(false);
 		console.log("TA BORT" , hamsters); // HUR TA BORT??? useSetRecoilState
-	}, [runUseEffect])
+	}, [runUseEffect, hamsters, setHamsters, setRunUseEffect])
 
   	return (
 		<Router>
