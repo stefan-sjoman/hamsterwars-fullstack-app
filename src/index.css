@@ -18,6 +18,7 @@
 	--color3: rgb(175, 149, 118);
 	--color4: rgb(6, 121, 24);
 	--color5: rgb(50, 90, 56);
+	--color6: rgb(184, 235, 193);
 }
 html {
 	background-color: var(--color1);

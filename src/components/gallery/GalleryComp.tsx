@@ -41,7 +41,9 @@ const GalleryComp = () => {
 		const name = event.target.value;
 		let validated = validateText(name);
 		if (!validated) {
-			return setNameError("Namn får vara max 32 tecken");
+			setNameError("Namn får vara max 32 tecken");
+			validateAll();
+			return;
 		}
 		setNameError("");
 		setInputName(name);
@@ -49,8 +51,16 @@ const GalleryComp = () => {
 	}
 	function validateAge(event:any) {
 		const age = event.target.value;
-		if (age < 0) return setAgeError("Åldern får inte vara under 0 år");
-		if (age > 9) return setAgeError("Åldern får inte vara över 9 år");
+		if (age < 0) {
+			setAgeError("Åldern får inte vara under 0 år");
+			validateAll();
+			return;
+		}
+		if (age > 9) {
+			setAgeError("Åldern får inte vara över 9 år");
+			validateAll();
+			return;
+		}
 		setAgeError("");
 		setInputAge(age);
 		validateAll();
@@ -58,7 +68,11 @@ const GalleryComp = () => {
 	function validateFavFood(event:any) {
 		const favFood = event.target.value;
 		let validated = validateText(favFood);
-		if (!validated) return setFavFoodError("Favoritmat får vara max 32 tecken");
+		if (!validated) {
+			setFavFoodError("Favoritmat får vara max 32 tecken");
+			validateAll();
+			return;
+		}
 		setFavFoodError("");
 		setInputFavFood(favFood);
 		validateAll();
@@ -66,7 +80,11 @@ const GalleryComp = () => {
 	function validateLoves(event:any) {
 		const loves = event.target.value;
 		let validated = validateText(loves);
-		if (!validated) return setLovesError("Älskar får vara max 32 tecken");
+		if (!validated) {
+			setLovesError("Älskar får vara max 32 tecken");
+			validateAll();
+			return;
+		}
 		setLovesError("");
 		setInputLoves(loves);
 		validateAll();
@@ -74,52 +92,75 @@ const GalleryComp = () => {
 	function validateImgName(event:any) {
 		const imgName = event.target.value;
 		let validated = validateText(imgName);
-		if (!validated) return setImgNameError("Bildadress får vara max 32 tecken");
-		if (imgName.includes("http:")) return setImgNameError("Bildadress måste vara lokal adress");
+		if (!validated) {
+			setImgNameError("Bildadress får vara max 32 tecken");
+			validateAll();
+			return;
+		}
+		if (imgName.includes("http:")) {
+			setImgNameError("Bildadress måste vara lokal adress");
+			validateAll();
+			return;
+		}
 		setImgNameError("");		
 		setInputImgName(imgName);
 		validateAll();
 	}
 	function validateText(text:string) {
-		validateAll();
 		if (text.length > 32) return false;
 		return true;
 	}
 	function nameToShort(event:any) {
 		const name = event.target.value;
-		if (name.length < 3) return setNameError("Namn måste vara minst 3 bokstäver");
+		if (name.length < 3) {
+			setNameError("Namn måste vara minst 3 bokstäver");
+			validateAll();
+			return;
+		}
 		validateAll();
 	}
 	function ageIsEmpty(event:any) {
 		const age = event.target.value;
-		if (age.length === 0) return setAgeError("Ålder måste vara ifyllt");
+		if (age.length === 0) { 
+			setAgeError("Ålder måste vara ifyllt");
+			validateAll();
+			return;
+		} 
 		validateAll();
 	}
 	function favFoodToShort(event:any) {
 		const favFood = event.target.value;
-		if (favFood.length < 3) return setFavFoodError("Favoritmat måste vara minst 3 bokstäver");
+		if (favFood.length < 3) { 
+			setFavFoodError("Favoritmat måste vara minst 3 bokstäver");
+			validateAll();
+			return;
+		} 
 		validateAll();
 	}
 	function lovesToShort(event:any) {
 		const loves = event.target.value;
-		if (loves.length < 3) return setLovesError("Älskar måste vara minst 3 bokstäver");
+		if (loves.length < 3) {
+			setLovesError("Älskar måste vara minst 3 bokstäver");
+			validateAll();
+			return;
+		} 
 		validateAll();
 	}
 	function imgNameIsImage(event:any) {
 		const imgName = event.target.value 
 		if (imgName.length === 0) {
-			validateAll();
 			setImgNameError("Bildadress måste finnas"); 
+			validateAll();
 			return;
 		}
 		if (!imgName.endsWith('.jpg')) {
-			validateAll();
 			setImgNameError("Endast .jpg bilder är tillåtna");
+			validateAll();
 			return;
 		} 
 		if (imgName === '.jpg') {
-			validateAll();
 			setImgNameError("Kontrollera bildadressen");
+			validateAll();
 			return;
 		}
 		validateAll();

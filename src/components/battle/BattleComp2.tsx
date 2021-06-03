@@ -32,7 +32,6 @@ const BattleComp2 = () => {
 		if (randomHamster1.firestoreId === randomHamster2.firestoreId) {
 			setRandomHamster1(null);
 			setRandomHamster2(null);
-			console.log("BLEV SAMMA");
 			setRunUseEffect(!runUseEffect);
 		}
 	}
