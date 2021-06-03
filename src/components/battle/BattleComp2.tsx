@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { Hamster } from "../../types/hamster-interface";
 import HamsterInfo from "../gallery/HamsterInfo";
 import BattleResult from "./BattleResult";
+import { runGetHamsters } from "../../atoms/atoms";
+import { useRecoilState } from "recoil";
 import './battle-comp.css';
 
 
 const BattleComp2 = () => {
 
+	const [updateHamsters, setUpdateHamsters] = useRecoilState(runGetHamsters);
 	const [randomHamster1, setRandomHamster1] = useState<Hamster | null >(null);
 	const [randomHamster2, setRandomHamster2] = useState<Hamster | null >(null);
 	const [updatedWinner, setUpdatedWinner] = useState<any>(null)
@@ -21,11 +24,18 @@ const BattleComp2 = () => {
 			setHamster(data);
 			setHasVoted(false);
 		}
-
 		getRandomHamster(setRandomHamster1);
 		getRandomHamster(setRandomHamster2);
-
 	}, [runUseEffect])
+
+	if (randomHamster1 && randomHamster2) {
+		if (randomHamster1.firestoreId === randomHamster2.firestoreId) {
+			setRandomHamster1(null);
+			setRandomHamster2(null);
+			console.log("BLEV SAMMA");
+			setRunUseEffect(!runUseEffect);
+		}
+	}
 
 	async function voting(winner:Hamster, loser:Hamster) {
 
@@ -58,18 +68,16 @@ const BattleComp2 = () => {
 				setRandomHamster1(null);
 				setRandomHamster2(null);	
 			}
-			// Promise.all([
-			// 	putHamster(winner.firestoreId, winnerUpdate),
-			// 	putHamster(loser.firestoreId, loserUpdate), 
-			// 	postMatch(winner.firestoreId, loser.firestoreId)
-			// ]).then(() => {
-			// 	setHasVoted(true);
-			// });
-				putHamster(winner.firestoreId, winnerUpdate)
-				putHamster(loser.firestoreId, loserUpdate)
-				postMatch(winner.firestoreId, loser.firestoreId)
-
-				setHasVoted(true);
+			Promise.all([
+				putHamster(winner.firestoreId, winnerUpdate),
+				putHamster(loser.firestoreId, loserUpdate),
+				postMatch(winner.firestoreId, loser.firestoreId),
+			]).then(() => {
+				setUpdateHamsters(!updateHamsters);
+			});
+			
+			
+			setHasVoted(true);
 		}
 	}
 
