@@ -58,7 +58,7 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDeleteAndDefeated
 			if (!hamster) return;
 			
 			const getMatchWinnersResponse = await fetch(`/matchwinners/${hamster.firestoreId}`, {method: 'GET'});
-			const data = await getMatchWinnersResponse.json();
+			const data = await getMatchWinnersResponse.json(); //fixa text respons
 
 			if (!data) return;
 			const matches:any[] = data;
