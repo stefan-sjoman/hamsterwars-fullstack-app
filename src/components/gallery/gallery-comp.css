@@ -4,12 +4,29 @@
 	margin: 1em;
 }
 .gallery-div {
-
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	justify-content: center;
 	gap: 1em;
 	padding: 1em 4em 
+}
+.gallery-card-btn {
+	background-color: white;
+	padding: 0.5em;
+    border: 0.5em outset rgb(212, 212, 212);
+	border-radius: 1em;
+	box-shadow: 5px 5px 10px black;
+	transition: transform 1s;
+}
+.gallery-card-btn:hover {
+	cursor: pointer;
+	transform: scale(1.05,1.05);
+}
+.gallery-card-btn:active {
+	cursor: pointer;
+	transform: scale(1.05,1.05);
+	box-shadow: none;
+	border: 0.5em inset rgb(212, 212, 212);
 }
 .open-hamster-section {
 	background-color: var(--color2);

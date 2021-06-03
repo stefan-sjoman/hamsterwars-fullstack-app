@@ -5,14 +5,34 @@
 	text-align: center;
 }
 .statistics-comp > div {
-	padding: 1em 4em;
 	margin: 4em 1em;
 }	
 .statistics-comp ol > li {
+	background-color: var(--color2);
+	border: 0.3em solid var(--color3);
+    border-radius: 2em;
 	list-style-position: inside;
-	margin-top: 3em;
+	padding: 1em 4em;
+	margin-bottom: 2em;
+}
+.statistics-frame {
+	background-color: white;
+    border: 0.3em solid var(--color3);
+    border-radius: 2em;
+    padding: 1em 4em;
+	
 }
 .statistics-comp li::marker {
 	font-family: Margarine;
 	font-size: 4em;	
+}
+.statistics-comp .hamster-card:hover {
+	cursor: auto;
+	transform: none;
+}
+
+@media only screen and (max-width: 1050px) {
+	.statistics-comp {
+		grid-template-columns: auto;
+	}
 }

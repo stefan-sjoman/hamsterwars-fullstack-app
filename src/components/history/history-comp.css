@@ -1,6 +1,10 @@
 .info-footer {
 	grid-column: 1/4;
 }
+.history-comp .hamster-card:hover {
+	cursor: auto;
+	transform: none;
+}
 
 @media only screen and (max-width: 1050px) {
 	.info-footer {

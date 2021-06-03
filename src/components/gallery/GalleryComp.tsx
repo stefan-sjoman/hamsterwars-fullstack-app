@@ -200,7 +200,7 @@ const GalleryComp = () => {
 						<div className="gallery-div">
 							{hamsters.length > 0 ? 
 								hamsters.map(hamster => (
-									<div onClick={() => openHamster(hamster)} key={hamster.firestoreId}>
+									<div className="gallery-card-btn" onClick={() => openHamster(hamster)} key={hamster.firestoreId}>
 										<HamsterCard hamster={hamster} />
 									</div>		
 								))

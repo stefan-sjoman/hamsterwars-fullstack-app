@@ -12,7 +12,7 @@ import ErrorComp from './components/error/ErrorComp';
 
 function App() {
 
-	const [hamsters, setHamsters] = useRecoilState(allHamsters); //useSetRecoilState
+	const [hamsters, setHamsters] = useRecoilState(allHamsters);
 	const [contactDb, setContactDb] = useState(true);
 	const [runUseEffect, setRunUseEffect] = useRecoilState(runGetHamsters);
 
@@ -24,19 +24,19 @@ function App() {
 				setContactDb(false);
 			} else {
 				setContactDb(true);
+				const data = await response.json();
+
+				
+				setHamsters(data);
 			}
-			const data = await response.json();
-			setHamsters(data);
 		}
 		getHamsters();
 		setRunUseEffect(false);
-		console.log("TA BORT" , hamsters); // HUR TA BORT??? useSetRecoilState
 	}, [runUseEffect, hamsters, setHamsters, setRunUseEffect])
 
   	return (
 		<Router>
 		<div className="app">
-			
 			<header>
 				<h1><Link to="/">HAMSTERWARS</Link></h1>
 				{contactDb ? 

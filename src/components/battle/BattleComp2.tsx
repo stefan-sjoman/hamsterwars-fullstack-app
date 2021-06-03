@@ -58,13 +58,18 @@ const BattleComp2 = () => {
 				setRandomHamster1(null);
 				setRandomHamster2(null);	
 			}
-			Promise.all([
-				putHamster(winner.firestoreId, winnerUpdate),
-				putHamster(loser.firestoreId, loserUpdate), 
+			// Promise.all([
+			// 	putHamster(winner.firestoreId, winnerUpdate),
+			// 	putHamster(loser.firestoreId, loserUpdate), 
+			// 	postMatch(winner.firestoreId, loser.firestoreId)
+			// ]).then(() => {
+			// 	setHasVoted(true);
+			// });
+				putHamster(winner.firestoreId, winnerUpdate)
+				putHamster(loser.firestoreId, loserUpdate)
 				postMatch(winner.firestoreId, loser.firestoreId)
-			]).then(() => {
+
 				setHasVoted(true);
-			});
 		}
 	}
 

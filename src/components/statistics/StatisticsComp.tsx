@@ -27,16 +27,18 @@ const StatisticsComp = () => {
 
 	function listHamsters(hamster:Hamster) {
 		return (
-			<li key={hamster.firestoreId}>
-				<HamsterCard hamster={hamster} />
-				<dl>
-					<dt>Vinster:</dt>
-					<dd>{hamster.wins + " st"}</dd>
-					<dt>Förluster:</dt>
-					<dd>{hamster.defeats + " st"}</dd>
-					<dt>Matcher:</dt>
-					<dd>{hamster.games + " st"}</dd>
-				</dl>
+			<li key={hamster.firestoreId} className="statistics-list-item">
+				<div className="statistics-frame">
+					<HamsterCard hamster={hamster} />
+					<dl>
+						<dt>Vinster:</dt>
+						<dd>{hamster.wins + " st"}</dd>
+						<dt>Förluster:</dt>
+						<dd>{hamster.defeats + " st"}</dd>
+						<dt>Matcher:</dt>
+						<dd>{hamster.games + " st"}</dd>
+					</dl>
+				</div>
 			</li>
 		)
 	}
