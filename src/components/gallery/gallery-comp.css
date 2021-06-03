@@ -77,6 +77,16 @@
 	.gallery-div .add-new {
 		grid-column: 1/5;
 	}
+	.add-new-form {
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(15, 2em);
+	}
+	.add-new-form .error-message {
+		grid-column: 1;
+	}
+	.add-new-form .button-div {
+		grid-column: 1;
+	}
 }
 @media only screen and (max-width: 850px) {
 	.gallery-div {

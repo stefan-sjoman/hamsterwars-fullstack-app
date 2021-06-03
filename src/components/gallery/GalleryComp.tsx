@@ -107,9 +107,21 @@ const GalleryComp = () => {
 	}
 	function imgNameIsImage(event:any) {
 		const imgName = event.target.value 
-		if (imgName.length === 0) return setImgNameError("Bildadress måste finnas");
-		if (!imgName.endsWith('.jpg')) return setImgNameError("Endast .jpg bilder är tillåtna");
-		if (imgName === '.jpg') return setImgNameError("Kontrollera bildadressen");
+		if (imgName.length === 0) {
+			validateAll();
+			setImgNameError("Bildadress måste finnas"); 
+			return;
+		}
+		if (!imgName.endsWith('.jpg')) {
+			validateAll();
+			setImgNameError("Endast .jpg bilder är tillåtna");
+			return;
+		} 
+		if (imgName === '.jpg') {
+			validateAll();
+			setImgNameError("Kontrollera bildadressen");
+			return;
+		}
 		validateAll();
 	}
 	function validateAll() {

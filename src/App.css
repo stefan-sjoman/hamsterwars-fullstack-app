@@ -146,6 +146,10 @@ dt {
 dd {
 	grid-column: 2;
 	text-align: right;
+	text-transform: lowercase;
+}
+dd::first-letter {
+	text-transform: capitalize;
 }
 
 @media only screen and (max-width: 1050px) {
@@ -153,6 +157,9 @@ dd {
 		flex-direction: column;
 		align-items: center;
 		padding: 1em 0em;
+	}
+	.one-game {
+		grid-template-columns: 1fr;
 	}
 }
 @media only screen and (max-width: 550px) {
