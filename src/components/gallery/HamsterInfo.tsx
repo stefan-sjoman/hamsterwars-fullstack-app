@@ -58,26 +58,29 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDeleteAndDefeated
 			if (!hamster) return;
 			
 			const getMatchWinnersResponse = await fetch(`/matchwinners/${hamster.firestoreId}`, {method: 'GET'});
-			const data = await getMatchWinnersResponse.json(); //fixa text respons
-
-			if (!data) return;
-			const matches:any[] = data;
-			let tempLosersId:any[] = [];
-			matches.forEach(match => {
-				const loserId = match.loserId;
-				tempLosersId.push(loserId);
-			})
-
-			if (tempLosersId === null) return;
-			let tempLosers:any[] = [];
-			tempLosersId.forEach(id => {
-				tempLosers.push(hamsters.find( ({ firestoreId }) => firestoreId === id )
-			)});
+			let data: any
 			let list:any[] = [];
-			tempLosers.forEach(loser => {
-				list.push(<dd key={loser.firestoreId}>{loser.name}</dd>)
-			});
-			
+			if (getMatchWinnersResponse.status === 200) {
+				data = await getMatchWinnersResponse.json();
+				const matches:any[] = data;
+				let tempLosersId:any[] = [];
+				matches.forEach(match => {
+					const loserId = match.loserId;
+					tempLosersId.push(loserId);
+				});
+	
+				if (tempLosersId === null) return;
+				let tempLosers:any[] = [];
+				tempLosersId.forEach(id => {
+					tempLosers.push(hamsters.find( ({ firestoreId }) => firestoreId === id )
+				)});
+				
+				tempLosers.forEach(loser => {
+					list.push(<dd key={loser.firestoreId}>{loser.name}</dd>)
+				});
+			} else {
+				list.push(<dd key={"404"}>Ingen vinst</dd>);
+			}		
 			setDefeatedHamsterList(list)
 		}
 		getMatchWinners();

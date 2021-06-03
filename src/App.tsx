@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, NavLink} from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import './App.css';
 import GalleryComp from './components/gallery/GalleryComp';
 import BattleComp2 from './components/battle/BattleComp2';
 import StatisticsComp from './components/statistics/StatisticsComp';
@@ -9,6 +8,7 @@ import StartComp from './components/start/StartComp';
 import HistoryComp from './components/history/HistoryComp';
 import {allHamsters, runGetHamsters} from './atoms/atoms';
 import ErrorComp from './components/error/ErrorComp';
+import './App.css';
 
 function App() {
 
@@ -25,14 +25,26 @@ function App() {
 			} else {
 				setContactDb(true);
 				const data = await response.json();
-
-				
+				sortHamsters(data);
 				setHamsters(data);
 			}
 		}
 		getHamsters();
 		setRunUseEffect(false);
 	}, [runUseEffect, hamsters, setHamsters, setRunUseEffect])
+
+	function sortHamsters(data:any) {
+		data.sort(function(a:any, b:any) {
+			if (a.name < b.name) {
+			  return -1;
+			}
+			if (a.name > b.name) {
+			  return 1;
+			}
+			return 0;
+		  });
+		return data;
+	}
 
   	return (
 		<Router>

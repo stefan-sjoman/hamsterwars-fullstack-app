@@ -12,13 +12,11 @@ const StatisticsComp = () => {
 		async function getWinners() {
 			const getWinnersResponse = await fetch(`/winners`, {method: 'GET'});
 			const getWinnersData = await getWinnersResponse.json();
-			console.log(getWinnersData);
 			setTopHamsterArray(getWinnersData);
 		}
 		async function getLosers() {
 			const getLosersResponse = await fetch(`/losers`, {method: 'GET'});
 			const getLosersData = await getLosersResponse.json();
-			console.log(getLosersData);
 			setBottomHamsterArray(getLosersData);
 		}
 		getWinners();

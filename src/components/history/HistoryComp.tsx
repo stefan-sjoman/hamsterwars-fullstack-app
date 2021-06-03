@@ -13,7 +13,6 @@ const HistoryComp = () => {
 			const getMatchesResponse = await fetch('/matches', {method: 'GET'});
 			const data = await getMatchesResponse.json();
 			setMatchesData(data);
-			console.log(data);
 		}
 		getMatches();
 	}, [runUseEffect])
