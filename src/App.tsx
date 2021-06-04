@@ -25,7 +25,6 @@ function App() {
 			} else {
 				setContactDb(true);
 				const data = await response.json();
-				console.log(data);
 				sortHamsters(data);
 				setHamsters(data);
 			}

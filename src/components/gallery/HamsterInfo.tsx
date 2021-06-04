@@ -74,6 +74,9 @@ const HamsterInfo = ({buttonText, hamster, buttonFunction, showDeleteAndDefeated
 				tempLosersId.forEach(id => {
 					tempLosers.push(hamsters.find( ({ firestoreId }) => firestoreId === id )
 				)});
+
+				//Remove duplicates
+				tempLosers = Array.from(new Set(tempLosers));
 				
 				tempLosers.forEach(loser => {
 					list.push(<dd key={loser.firestoreId}>{loser.name}</dd>)

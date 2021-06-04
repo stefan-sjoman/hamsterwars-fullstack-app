@@ -49,6 +49,7 @@ const GalleryComp = () => {
 		setInputName(name);
 		validateAll();
 	}
+
 	function validateAge(event:any) {
 		const age = event.target.value;
 		if (age < 0) {
@@ -65,6 +66,7 @@ const GalleryComp = () => {
 		setInputAge(age);
 		validateAll();
 	}
+
 	function validateFavFood(event:any) {
 		const favFood = event.target.value;
 		let validated = validateText(favFood);
@@ -77,6 +79,7 @@ const GalleryComp = () => {
 		setInputFavFood(favFood);
 		validateAll();
 	}
+
 	function validateLoves(event:any) {
 		const loves = event.target.value;
 		let validated = validateText(loves);
@@ -89,6 +92,7 @@ const GalleryComp = () => {
 		setInputLoves(loves);
 		validateAll();
 	}
+
 	function validateImgName(event:any) {
 		const imgName = event.target.value;
 		let validated = validateText(imgName);
@@ -106,10 +110,12 @@ const GalleryComp = () => {
 		setInputImgName(imgName);
 		validateAll();
 	}
+
 	function validateText(text:string) {
 		if (text.length > 32) return false;
 		return true;
 	}
+
 	function nameToShort(event:any) {
 		const name = event.target.value;
 		if (name.length < 3) {
@@ -119,6 +125,7 @@ const GalleryComp = () => {
 		}
 		validateAll();
 	}
+
 	function ageIsEmpty(event:any) {
 		const age = event.target.value;
 		if (age.length === 0) { 
@@ -128,6 +135,7 @@ const GalleryComp = () => {
 		} 
 		validateAll();
 	}
+
 	function favFoodToShort(event:any) {
 		const favFood = event.target.value;
 		if (favFood.length < 3) { 
@@ -137,6 +145,7 @@ const GalleryComp = () => {
 		} 
 		validateAll();
 	}
+
 	function lovesToShort(event:any) {
 		const loves = event.target.value;
 		if (loves.length < 3) {
@@ -146,6 +155,7 @@ const GalleryComp = () => {
 		} 
 		validateAll();
 	}
+
 	function imgNameIsImage(event:any) {
 		const imgName = event.target.value 
 		if (imgName.length === 0) {
@@ -165,6 +175,7 @@ const GalleryComp = () => {
 		}
 		validateAll();
 	}
+	
 	function validateAll() {
 
 		const possibleErrors = (nameError === "" && ageError === "" && favFoodError === "" && lovesError === "" && 
@@ -195,6 +206,16 @@ const GalleryComp = () => {
 		setUpdateHamsters(!updateHamsters);
 		setShowAddNew(!showAddNew);
 	}
+
+	function chooseFormButton() {
+		if (isAllValidated) {
+			return <button className="basic-btn" onClick={addHamster}>LÄGG TILL</button>;
+		}
+		else {
+			return <button className="disabled-btn">LÄGG TILL</button>;
+		}
+	}
+	const formButton = chooseFormButton();
 
 	function showGalleryOrHamster() {
 		if (!showHamster) {
@@ -227,10 +248,7 @@ const GalleryComp = () => {
 									<input type="text" name="imgName" value={inputImgName} onChange={validateImgName} onBlur={imgNameIsImage}/>
 									<div className="error-message">{imgNameError}</div>
 									<div className="button-div">
-									{isAllValidated ? 
-										<button className="basic-btn" onClick={addHamster}>LÄGG TILL</button> :
-										<button className="disabled-btn">LÄGG TILL</button>
-									}
+									{formButton}
 									</div>
 								</div>
 							</section>
